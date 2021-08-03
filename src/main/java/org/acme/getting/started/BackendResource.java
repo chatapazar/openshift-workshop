@@ -41,6 +41,9 @@ public class BackendResource {
     @ConfigProperty(name = "app.message", defaultValue = "Hello, World")
     String message;
 
+    @ConfigProperty(name = "app.secretMessage", defaultValue = "Not Found Secret")
+    String secretMessage;
+
     @ConfigProperty(name = "app.errorCodeNotLive", defaultValue = "503")
     String errorCodeNotLive;
 
@@ -141,7 +144,21 @@ public class BackendResource {
             logger.info("Get Version:"+version);
             return Response.ok()
                     .encoding("text/plain")
-                    .entity(generateMessage("", "200"))
+                    .entity(generateMessage(version, "200"))
+                    .expires(Date.from(Instant.now().plus(Duration.ofMillis(0))))
+                    .build();
+        }
+
+        @GET
+        @Path("/showsecret")
+        @Produces(MediaType.TEXT_PLAIN)
+        @Operation(summary = "Show Secret")
+        @APIResponse(responseCode = "200", content = @Content(mediaType = MediaType.TEXT_PLAIN))
+        public Response showSecret() {
+            logger.info("Show Secret: " + secretMessage);
+            return Response.ok()
+                    .encoding("text/plain")
+                    .entity(generateMessage(secretMessage, "200"))
                     .expires(Date.from(Instant.now().plus(Duration.ofMillis(0))))
                     .build();
         }

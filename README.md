@@ -1,8 +1,11 @@
 s2i --> from github
 
-deployment, service, pod, route, buildconfig/build
-
+deployment, service, pod, route, buildconfig/build, imagestream
 environment variable, configmag, secret
+app.backend 
+app.backend.200=https://httpbin.org/status/200
+app.backend.400=https://httpbin.org/status/400
+
 
 health readiness/liveness
 
