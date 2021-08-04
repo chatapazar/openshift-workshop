@@ -202,9 +202,9 @@ public class BackendResource {
             if (!ApplicationConfig.IS_ALIVE.get())
                 ApplicationConfig.IS_ALIVE.set(true);
             return Response.ok().encoding("text/plain")
-                .entity(generateMessage("Liveness: " + ApplicationConfig.IS_ALIVE.get(), "200"))
-                .expires(Date.from(Instant.now().plus(Duration.ofMillis(0))))
-                .build();
+                 .entity(generateMessage("Liveness: " + ApplicationConfig.IS_ALIVE.get(), "200"))
+                 .expires(Date.from(Instant.now().plus(Duration.ofMillis(0))))
+                 .build();
         }
 
         @GET

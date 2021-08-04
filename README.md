@@ -30,9 +30,22 @@ oc project <>
 POD=$(oc get pods --no-headers -l app=backend | grep backend |head -n 1| awk '{print $1}')
 oc rsh $POD
 curl http://localhost:8080/q/health/live
+curl http://localhost:8080/backend/stop
+curl http://localhost:8080/q/health/live
+curl http://localhost:8080/backend/start
+curl http://localhost:8080/q/health/live
+
+curl http://localhost:8080/q/health/ready
+curl http://localhsot:8080/databasestatus/down
+curl http://localhost:8080/q/health/ready
+curl http://localhost:8080/databasestatus/up
 curl http://localhost:8080/q/health/ready
 
-
+oc rollout pause deployment/backend
+oc set probe deployment/backend --readiness --get-url=http://:8080/q/health/ready --initial-delay-seconds=8 --failure-threshold=1 --period-seconds=3 --timeout-seconds=5
+oc set probe deployment/backend --liveness --get-url=http://:8080/q/health/live --initial-delay-seconds=5 --failure-threshold=1 --period-seconds=10 --timeout-seconds=5
+oc rollout resume deployment/backend
+watch oc get pods -n project1
 
 
 scale , manual, auto

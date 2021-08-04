@@ -9,7 +9,7 @@ import org.eclipse.microprofile.health.Readiness;
 import javax.enterprise.context.ApplicationScoped;
 //import javax.xml.crypto.Data;
 import javax.inject.Inject;
-import org.jboss.logging.Logger;
+//import org.jboss.logging.Logger;
 
 @Readiness
 @ApplicationScoped
