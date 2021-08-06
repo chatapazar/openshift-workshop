@@ -4,6 +4,8 @@
 - [Deploy java application (quarkus) to openshift with s2i](#deploy-java-application-quarkus-to-openshift-with-s2i)
   - [Create Openshift Project](#create-openshift-project)
   - [Deploy java Application to Openshift with OpenShift Developer Console (S2I)](#deploy-java-application-to-openshift-with-openshift-developer-console-s2i)
+  - [Test Rest API of Backend Application](#test-rest-api-of-backend-application)
+  - [Next Step](#next-step)
 
 <!-- /TOC -->
 
@@ -55,6 +57,64 @@
   - add label 'app=backend'
   ![](images/work_11.png)
   - click 'Resource limits' link
-  - set CPU
+  - set CPU Request: 100 millicores
+  - set CPU Limit:   200 millicores
+  - set Memory Request: 256 Mi
+  - set Memory Limit:   512 Mi
   ![](images/work_12.png)
-- a
+- Click Create, Console will back to Topology Page
+  ![](images/work_13.png)
+- Click at Duke icon, Dev Console will show Deployment information
+  ![](images/work_14.png)
+- in build section, OpenShift Build is creating image with S2I  
+  ![](images/work_15.png)
+- click View logs at Build #1
+  ![](images/work_16.png)
+- wait until build complete, see build backend-1 change from running to complete (3-5 minutes)
+  ![](images/work_18.png)
+- after build complete, openshift will take the image from the build to deploy and create a pod as shown in the picture.
+  ![](images/work_19.png)  
+- wait until Pod 'backend-xxxx-xxx' change status to Running
+  ![](images/work_20.png) 
+- click View logs, check application start complete (wait until logging show message 'Installed features: ....') 
+  ![](images/work_21.png)  
+- click Topology in left pane, at duke icon, you will see Open URL link, click it to open browser to this application in new tab
+  ![](images/work_22.png)  
+- Or Click Location from Routes 'backend' in 'backend' Deployment information
+  ![](images/work_23.png)  
+- Example of backend application landing page
+  ![](images/work_25.png)  
+- Deployment Done!
+
+## Test Rest API of Backend Application
+- click '>_' icon in top of Openshift Web Console to open Web Terminal
+  ![](images/work_27.png)  
+- First Time, Web Terminal will ask you for project to initialze terminal, please select your project such as user1, click start
+  ![](images/work_28.png)  
+- wait until terminal start complete, command prompt will show in command line terminal
+  ![](images/work_29.png)  
+- Next time, you can press from the icon '>_' immediately without creating a new one.
+- in command line terminal, check current project by below command
+    ```bash
+    oc project
+    ```
+    example of output
+    ```bash
+    Using project "user1" from context named "user1-context" on server "https://172.30.0.1:443".
+    ```
+- if current project is not your project (such as result is not 'Using project "user1"'), use below command to set current project to command line context
+    ```bash
+    oc project user1
+    ```
+- test call backend service api (REST)
+  ```bash
+  curl http://$(oc get route backend -o jsonpath='{.spec.host}')/backend
+  ```
+  example of result
+  ```bash
+  Backend version:v1, Response:200, Host:backend-7b5c56fc8c-t57wl, Status:200, Message: Hello, World
+  ```
+  - remark: Host name in result of this api is name of Pod, please check and verify it!
+- if done!, You are ready for the next step.
+## Next Step
+- [Openshift Topology](openshifttopology.md)
