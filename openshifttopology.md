@@ -7,6 +7,7 @@
   - [Labels](#labels)
   - [Deployment](#deployment)
   - [Service & Route](#service--route)
+  - [Route](#route)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -173,4 +174,49 @@ A deployment is a supervisor for pods, giving you fine-grained control over how 
   ```
 
 ## Service & Route
+Services
+A service is an abstraction for pods, providing a stable, so called virtual IP (VIP) address. While pods may come and go and with it their IP addresses, a service allows clients to reliably connect to the containers running in the pod using the VIP. The "virtual" in VIP means it is not an actual IP address connected to a network interface, but its purpose is purely to forward traffic to one or more pods. Keeping the mapping between the VIP and the pods up-to-date is the job of kube-proxy, a process that runs on every node, which queries the API server to learn about new services in the cluster.  
+Let's create a new pod supervised by a replication controller and a service along with it:
+- run below command in web terminal : 
+  - https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/rc.yaml
+  - https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/svc.yaml
+  ```bash
+  oc apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/rc.yaml
+  oc apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/svc.yaml
+  ```
+- Verify the pod is running:
+  ```bash
+  oc get pods -l app=sise
+  ```
+- A new pod name should be generated each time this example is run. Make sure to include your own pod name when running the following examples:
+  ```bash
+  oc describe pod <podname>
+  ```
+- The output should appear similar to the following (which has been truncated for readability):
+  ```bash
 
+  ```
+- You can, from within the cluster, access the pod directly via its assigned IP (change pod name and ip address from describe pod):
+  ```bash
+  oc exec <pod name> -t -- curl -s <ip address>:9876/info
+  ```
+- This is however, as mentioned above, not advisable since the IPs assigned to pods may change as pods are migrated or rescheduled. The service created at the start of this lesson, simpleservice, is used to abstract the access to the pod away from a specific IP:
+  ```bash
+  oc get service -l app=sise
+  ```
+- From within the cluster, we can now access any affiliated pods using the IP address of the simpleservice svc endpoint on port 80. KubeDNS even provides basic name resolution for Kubernetes services (within the same Kubernetes namespace). This allows us to connect to pods using the associated service name - no need to including IP addresses or port numbers.
+  ```bash
+  oc exec <pod name> -t -- curl -s simpleservice/info
+  ```
+- Let’s now add a second pod by scaling up the RC supervising it:
+  ```bash
+  oc scale --replicas=2 rc/rcsise
+  ```
+- Wait for both pods to report they are in the "Running" state:
+  ```bash
+  oc get pods -l app=sise
+  ```
+- a
+
+## Route
+route exposes a service at a host name, like www.example.com, so that external clients can reach it by name.
