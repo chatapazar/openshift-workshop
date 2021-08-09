@@ -178,10 +178,10 @@ Services
 A service is an abstraction for pods, providing a stable, so called virtual IP (VIP) address. While pods may come and go and with it their IP addresses, a service allows clients to reliably connect to the containers running in the pod using the VIP. The "virtual" in VIP means it is not an actual IP address connected to a network interface, but its purpose is purely to forward traffic to one or more pods. Keeping the mapping between the VIP and the pods up-to-date is the job of kube-proxy, a process that runs on every node, which queries the API server to learn about new services in the cluster.  
 Let's create a new pod supervised by a replication controller and a service along with it:
 - run below command in web terminal : 
-  - https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/rc.yaml
+  - https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
   - https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/svc.yaml
   ```bash
-  oc apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/rc.yaml
+  oc apply -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
   oc apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/svc.yaml
   ```
 - Verify the pod is running:
