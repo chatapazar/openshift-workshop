@@ -209,10 +209,6 @@ A Liveness checks determines if the container in which it is scheduled is still 
 
 ## Test Liveness Probe
 - go to web terminal
-- scale pods to 2 
-  ```bash
-  oc 
-  ```
 - check current pod
   ```bash
   oc get pods -l app=backend
@@ -386,6 +382,11 @@ A Liveness checks determines if the container in which it is scheduled is still 
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   ```
+- set repica back to 1  
+  ```bash
+  oc scale deployment/backend --replicas=1
+  ```
+  
 ## Remove Application Health
 - view current health check, click topology in left menu, click Duke icon (backend deployment), at actions menu, select edit Health Checks, view current Health checks
   ![](images/health_4.png) 
