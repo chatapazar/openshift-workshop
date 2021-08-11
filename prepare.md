@@ -24,11 +24,11 @@ spec:
     type: "elasticsearch"  
     retentionPolicy: 
       application:
-        maxAge: 1d
+        maxAge: 3d
       infra:
-        maxAge: 1d
+        maxAge: 3d
       audit:
-        maxAge: 1d
+        maxAge: 3d
     elasticsearch:
       nodeCount: 3 
       storage:

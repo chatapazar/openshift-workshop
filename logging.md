@@ -69,6 +69,8 @@
 ## Monitor Container Log with EFK Stack in Openshift
 - From Logs tab in Pod details, click show in Kibana icon to open kibana in new tab
   ![](images/log_5.png)
+- Optional: for firstime, openshift will request you re-login and allow authorized to kibana (with oauth), click allow selected permissions
+  ![](images/log_13.png)
 - Openshift will Open Kibana from EFK Stack, default page is Discover and auto add filter with pod name, namespace/project and container name
   ![](images/log_6.png)
 - Developer can custom filter to view log.
