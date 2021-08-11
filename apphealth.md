@@ -248,7 +248,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
 
 ## Test Readiness Probe
 - go to web terminal
-- check current pod  
+- scale pod to 2  
   ```bash
   oc scale deployment/backend --replicas=2
   ```
