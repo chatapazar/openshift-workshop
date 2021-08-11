@@ -209,6 +209,10 @@ A Liveness checks determines if the container in which it is scheduled is still 
 
 ## Test Liveness Probe
 - go to web terminal
+- scale pods to 2 
+  ```bash
+  oc 
+  ```
 - check current pod
   ```bash
   oc get pods -l app=backend
@@ -250,14 +254,41 @@ A Liveness checks determines if the container in which it is scheduled is still 
 - go to web terminal
 - check current pod  
   ```bash
-  oc get pods -l app=backend
+  oc scale deployment/backend --replicas=2
+  ```
+- check, have 2 pod of backend
+  ```bash
+  oc get pod -l app=backend
   ```
   example result, check ready is 1/1
   ```bash
-  NAME                                         READY   STATUS      RESTARTS   AGE
-  backend-58769d5765-dw6fc                     1/1     Running     1          15h
+  NAME                      READY   STATUS    RESTARTS   AGE
+  backend-87784db56-2642v   1/1     Running   0          2m38s
+  backend-87784db56-swg4m   1/1     Running   0          6m19s
   ```
-- test call backend api from route
+- check service call to both pods
+  ```bash
+  oc describe service backend
+  ```
+  example result, in endpoints section have 2 ipaddress from both pods.
+  ```bash
+  ...
+  IP:                172.30.76.111
+  IPs:               172.30.76.111
+  Port:              8080-tcp  8080/TCP
+  TargetPort:        8080/TCP
+  Endpoints:         10.131.0.43:8080,10.131.0.44:8080
+  Port:              8443-tcp  8443/TCP
+  TargetPort:        8443/TCP
+  Endpoints:         10.131.0.43:8443,10.131.0.44:8443
+  Port:              8778-tcp  8778/TCP
+  TargetPort:        8778/TCP
+  Endpoints:         10.131.0.43:8778,10.131.0.44:8778
+  Session Affinity:  None
+  Events:            <none>
+  ...
+  ```
+- test call backend api from route, call 2-4 times to check response from both pods
   ```bash
   BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
@@ -265,6 +296,9 @@ A Liveness checks determines if the container in which it is scheduled is still 
   example response
   ```bash
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   ```
 - set readiness prove of backend to down
   ```bash
@@ -286,29 +320,44 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```bash
   oc get pods -l app=backend
   ```
-  example result, check ready change to 0/1
+  example result, check ready change to 0/1 in one pod
   ```bash
   NAME                       READY   STATUS    RESTARTS   AGE
-  backend-58769d5765-dw6fc   0/1     Running   2          15h
+  backend-87784db56-2642v   0/1     Running   0          9m48s
+  backend-87784db56-swg4m   1/1     Running   0          13m
   ```
-  see topology, There will be a circle around the icon (duke icon) in light blue.
-  ![](images/health_6.png) 
+- check service again
+  ```bash
+  oc describe service backend
+  ```
+  example result, endpoints has only one ipaddress.
+  ```bash
+  ...
+  IP:                172.30.76.111
+  IPs:               172.30.76.111
+  Port:              8080-tcp  8080/TCP
+  TargetPort:        8080/TCP
+  Endpoints:         10.131.0.43:8080
+  Port:              8443-tcp  8443/TCP
+  TargetPort:        8443/TCP
+  Endpoints:         10.131.0.43:8443
+  Port:              8778-tcp  8778/TCP
+  TargetPort:        8778/TCP
+  Endpoints:         10.131.0.43:8778
+  Session Affinity:  None
+  Events:            <none>
+   ```
 - test call backend again
   ```bash
   BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
-  example result, show can not call backend 
+  example result, call 2-4 tiems, have only response from 1 pod.
   ```bash
-          <li>
-              <strong>Route and path matches, but all pods are down.</strong>
-              Make sure that the resources exposed by this route (pods, services, deployment configs, etc) have at least one pod running.
-            </li>
-          </ul>
-        </div>
-      </div>
-    </body>
-  </html>
+  Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
   ```
 - set readiness probe up again
   ```bash
@@ -322,18 +371,20 @@ A Liveness checks determines if the container in which it is scheduled is still 
   example result, ready change back to 1/1
   ```bash
   NAME                       READY   STATUS    RESTARTS   AGE
-  backend-58769d5765-dw6fc   1/1     Running   2          15h
+  backend-87784db56-2642v    1/1     Running     0          15m
+  backend-87784db56-swg4m    1/1     Running     0          18m
   ```
-  see topology, There will be a circle around the icon (duke icon) in dark blue.
-  ![](images/health_7.png)
-- re-test call backend again
+- re-test call backend again, test call 2-4 times
   ```bash
   BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
-  example output
-  ```
+  example output, response from 2 pods again.
+  ```bash
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
+  Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   ```
 ## Remove Application Health
 - view current health check, click topology in left menu, click Duke icon (backend deployment), at actions menu, select edit Health Checks, view current Health checks
