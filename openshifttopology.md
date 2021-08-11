@@ -265,7 +265,7 @@ route exposes a service at a host name, like www.example.com, so that external c
   ![](images/topology_9.png) 
 - test call route from command line (in your laptop or web terminal)
   ```bash
-  curl http://your-route/info
+  curl http://$(oc get route simpleservice -o jsonpath='{.spec.host}')/info
   ```
   example 
   ```bash
