@@ -2,14 +2,14 @@
 <!-- TOC -->
 
 - [Deploy java application (quarkus) to openshift with s2i](#deploy-java-application-quarkus-to-openshift-with-s2i)
-  - [Create Openshift Project](#create-openshift-project)
+  - [Openshift Project](#openshift-project)
   - [Deploy java Application to Openshift with OpenShift Developer Console (S2I)](#deploy-java-application-to-openshift-with-openshift-developer-console-s2i)
   - [Test Rest API of Backend Application](#test-rest-api-of-backend-application)
   - [Next Step](#next-step)
 
 <!-- /TOC -->
 
-## Create Openshift Project
+## Openshift Project
 - open browser to https://console-openshift-console.apps.xxx.opentlc.com
   - confirm URL from instructor
 - login to openshift with your username/password
@@ -18,14 +18,21 @@
   ![](images/work_1.png)
 - select Developer Perspective from left menu (if openshift don't default page for you)
   ![](images/work_2.png)
-- create project with your username such as 'user1'
-  - go to dropdown at Project: All Projects
-  - click Create Project
-  ![](images/work_3.png)
-  - set Name*= 'userx', Display Name = 'userx', Description = 'userx workshop'
-  ![](images/work_4.png)
-  - click create, openshift console will change page to new project
-  ![](images/work_5.png)
+- default project is your name. such as 'user1', 'user2'  
+- if login first time, dev console will launch developer quick tour, click Skip tour
+  ![](images/deploy_2.png)
+- if deveveloper console not default your project, click Project name 'PR userx' in topology or select from Project Dropdownlist
+  ![](images/deploy_3.png)
+  ![](images/deploy_4.png)
+- Optional: How to Create Project (Don't create project in this workshop, we prepare project for you now!)
+  - create project with your username such as 'user1'  
+    - go to dropdown at Project: All Projects
+    - click Create Project (Please use your username to Project name!!!)
+    ![](images/work_3.png)
+    - set Name*= 'userx', Display Name = 'userx', Description = 'userx workshop'
+    ![](images/work_4.png)
+    - click create, openshift console will change page to new project
+    ![](images/work_5.png)
 
 ## Deploy java Application to Openshift with OpenShift Developer Console (S2I)
 - click +Add menu in left pane

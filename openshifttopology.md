@@ -8,6 +8,7 @@
   - [Deployment](#deployment)
   - [Service & Route](#service--route)
   - [Route](#route)
+  - [Next Step](#next-step)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -179,10 +180,10 @@ A service is an abstraction for pods, providing a stable, so called virtual IP (
 Let's create a new pod supervised by a replication controller and a service along with it:
 - run below command in web terminal : 
   - https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
-  - https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/svc.yaml
+  - https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/svc.yaml
   ```bash
   oc apply -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
-  oc apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/services/svc.yaml
+  oc apply -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/svc.yaml
   ```
 - Verify the pod is running:
   ```bash
@@ -194,7 +195,15 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```
 - The output should appear similar to the following (which has been truncated for readability):
   ```bash
-
+  ...
+    Status:       Running
+    IP:           10.131.0.38
+    IPs:
+    IP:           10.131.0.38
+    Controlled By:  ReplicaSet/sise-747848cd97
+    Containers:
+    sise:
+  ...
   ```
 - You can, from within the cluster, access the pod directly via its assigned IP (change pod name and ip address from describe pod):
   ```bash
@@ -202,7 +211,7 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```
 - This is however, as mentioned above, not advisable since the IPs assigned to pods may change as pods are migrated or rescheduled. The service created at the start of this lesson, simpleservice, is used to abstract the access to the pod away from a specific IP:
   ```bash
-  oc get service -l app=sise
+  oc get service/simpleservice
   ```
 - From within the cluster, we can now access any affiliated pods using the IP address of the simpleservice svc endpoint on port 80. KubeDNS even provides basic name resolution for Kubernetes services (within the same Kubernetes namespace). This allows us to connect to pods using the associated service name - no need to including IP addresses or port numbers.
   ```bash
@@ -210,13 +219,65 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```
 - Let’s now add a second pod by scaling up the RC supervising it:
   ```bash
-  oc scale --replicas=2 rc/rcsise
+  oc scale --replicas=2 deployment/sise
   ```
 - Wait for both pods to report they are in the "Running" state:
   ```bash
   oc get pods -l app=sise
   ```
-- a
+- test call service, you can see out put from 2 pods
+  ```bash
+  oc exec <pod name> -t -- curl -s simpleservice/info
+  ```
+  sample output (replace pod name before run)
+  ```bash
+  oc exec <pod name> -t -- curl -s simpleservice/info
+  {"host": "simpleservice", "version": "0.9", "from": "10.131.0.38"}
+  oc exec <pod name> -t -- curl -s simpleservice/info
+  {"host": "simpleservice", "version": "0.9", "from": "10.131.0.1"}
+  oc exec <pod name> -t -- curl -s simpleservice/info
+  {"host": "simpleservice", "version": "0.9", "from": "10.131.0.38"}
+  oc exec <pod name> -t -- curl -s simpleservice/info
+  {"host": "simpleservice", "version": "0.9", "from": "10.131.0.1"}
+  ```  
 
 ## Route
 route exposes a service at a host name, like www.example.com, so that external clients can reach it by name.
+- create route for service
+  ```bash
+  oc expose service/simpleservice 
+  ```
+- get route from command line
+  ```bash
+  oc get route simpleservice
+  ```
+  example output
+  ```bash
+  NAME            HOST/PORT                                                           PATH   SERVICES        PORT   TERMINATION   WILDCARD
+  simpleservice   simpleservice-user1.apps.cluster-4b8f.4b8f.sandbox930.opentlc.com          simpleservice   9876                 None
+  ```
+- or get route from web console, go to topology, click sise deployment, view Route
+  ![](images/topology_9.png) 
+- test call route from command line (in your laptop or web terminal)
+  ```bash
+  curl http://your-route/info
+  ```
+  example 
+  ```bash
+  bash-4.4 ~ $ oc get route simpleservice
+  NAME            HOST/PORT                                                           PATH   SERVICES        PORT   TERMINATION   WILDCARD
+  simpleservice   simpleservice-user1.apps.cluster-4b8f.4b8f.sandbox930.opentlc.com          simpleservice   9876                 None
+  bash-4.4 ~ $ curl http://simpleservice-user1.apps.cluster-4b8f.4b8f.sandbox930.opentlc.com/info
+  {"host": "simpleservice-user1.apps.cluster-4b8f.4b8f.sandbox930.opentlc.com", "version": "0.9", "from": "10.128.2.26"}
+  bash-4.4 ~ $ 
+  ```
+- clean up application
+  ```bash
+  oc delete route simpleservice
+  oc delete -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/svc.yaml
+  oc delete -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
+
+  ```
+
+## Next Step
+- [Environment Variable, ConfigMap, Secret](evconfigsecret.md)
