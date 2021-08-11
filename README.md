@@ -2,9 +2,6 @@
 
 ![](images/workshop.png)
 
-## Gitbook
-Chick here for [Gitbook]()
-
 ## Table of Contents
 - [Deploy java application (quarkus) to openshift with s2i](deploywiths2i.md)
 - [Openshift Topology](openshifttopology.md)
