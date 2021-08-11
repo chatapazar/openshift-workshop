@@ -189,9 +189,14 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```bash
   oc get pods -l app=sise
   ```
+- get Pod Name
+  ```bash
+  POD=$(oc get pods --no-headers -l app=sise | grep sise |head -n 1| awk '{print $1}')
+  echo $POD
+  ```  
 - A new pod name should be generated each time this example is run. Make sure to include your own pod name when running the following examples:
   ```bash
-  oc describe pod <podname>
+  oc describe pod $POD
   ```
 - The output should appear similar to the following (which has been truncated for readability):
   ```bash
@@ -207,7 +212,7 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```
 - You can, from within the cluster, access the pod directly via its assigned IP (change pod name and ip address from describe pod):
   ```bash
-  oc exec <pod name> -t -- curl -s <ip address>:9876/info
+  oc exec $POD -t -- curl -s <ip address>:9876/info
   ```
 - This is however, as mentioned above, not advisable since the IPs assigned to pods may change as pods are migrated or rescheduled. The service created at the start of this lesson, simpleservice, is used to abstract the access to the pod away from a specific IP:
   ```bash
@@ -215,7 +220,7 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```
 - From within the cluster, we can now access any affiliated pods using the IP address of the simpleservice svc endpoint on port 80. KubeDNS even provides basic name resolution for Kubernetes services (within the same Kubernetes namespace). This allows us to connect to pods using the associated service name - no need to including IP addresses or port numbers.
   ```bash
-  oc exec <pod name> -t -- curl -s simpleservice/info
+  oc exec $POD -t -- curl -s simpleservice/info
   ```
 - Let’s now add a second pod by scaling up the RC supervising it:
   ```bash
@@ -227,17 +232,17 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```
 - test call service, you can see out put from 2 pods
   ```bash
-  oc exec <pod name> -t -- curl -s simpleservice/info
+  oc exec $POD -t -- curl -s simpleservice/info
   ```
-  sample output (replace pod name before run)
+  sample output 
   ```bash
-  oc exec <pod name> -t -- curl -s simpleservice/info
+  oc exec $POD -t -- curl -s simpleservice/info
   {"host": "simpleservice", "version": "0.9", "from": "10.131.0.38"}
-  oc exec <pod name> -t -- curl -s simpleservice/info
+  oc exec $POD -t -- curl -s simpleservice/info
   {"host": "simpleservice", "version": "0.9", "from": "10.131.0.1"}
-  oc exec <pod name> -t -- curl -s simpleservice/info
+  oc exec $POD -t -- curl -s simpleservice/info
   {"host": "simpleservice", "version": "0.9", "from": "10.131.0.38"}
-  oc exec <pod name> -t -- curl -s simpleservice/info
+  oc exec $POD -t -- curl -s simpleservice/info
   {"host": "simpleservice", "version": "0.9", "from": "10.131.0.1"}
   ```  
 
