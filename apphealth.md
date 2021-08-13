@@ -37,7 +37,6 @@ A Liveness checks determines if the container in which it is scheduled is still 
     ```
     after connect to pod, shell will change from 'bash-4.4' to 'sh-4.4'
     ```bash
-    POD=$(oc get pods --no-headers -l app=backend | grep backend |head -n 1| awk '{print $1}')
     bash-4.4 ~ $ oc rsh $POD
     sh-4.4$ 
     ```
