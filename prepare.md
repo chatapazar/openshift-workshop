@@ -53,3 +53,4 @@ spec:
       type: "fluentd"  
       fluentd: {}
 
+create index infra and app in kibana
