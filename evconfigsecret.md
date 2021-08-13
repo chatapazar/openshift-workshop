@@ -120,6 +120,9 @@ The Secret object type provides a mechanism to hold sensitive information such a
 - Re-Test showsecret api again
   ```bash
   curl $BACKEND_URL/backend/showsecret
+  ```
+  example result
+  ```bash
   Backend version:v1, Response:200, Host:backend-5bc95899d-tdmv5, Status:200, Message: Hi! World of Quarkus!
   ```
 
