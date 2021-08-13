@@ -1,0 +1,32 @@
+#!/bin/sh
+echo "add role 1 to 30 ..."
+oc adm policy add-role-to-user monitoring-edit user1 -n user1
+oc adm policy add-role-to-user monitoring-edit user2 -n user2
+oc adm policy add-role-to-user monitoring-edit user3 -n user3
+oc adm policy add-role-to-user monitoring-edit user4 -n user4
+oc adm policy add-role-to-user monitoring-edit user5 -n user5
+oc adm policy add-role-to-user monitoring-edit user6 -n user6
+oc adm policy add-role-to-user monitoring-edit user7 -n user7
+oc adm policy add-role-to-user monitoring-edit user8 -n user8
+oc adm policy add-role-to-user monitoring-edit user9 -n user9
+oc adm policy add-role-to-user monitoring-edit user10 -n user10
+oc adm policy add-role-to-user monitoring-edit user11 -n user11
+oc adm policy add-role-to-user monitoring-edit user12 -n user12
+oc adm policy add-role-to-user monitoring-edit user13 -n user13
+oc adm policy add-role-to-user monitoring-edit user14 -n user14
+oc adm policy add-role-to-user monitoring-edit user15 -n user15
+oc adm policy add-role-to-user monitoring-edit user16 -n user16
+oc adm policy add-role-to-user monitoring-edit user17 -n user17
+oc adm policy add-role-to-user monitoring-edit user18 -n user18
+oc adm policy add-role-to-user monitoring-edit user19 -n user19
+oc adm policy add-role-to-user monitoring-edit user20 -n user20
+oc adm policy add-role-to-user monitoring-edit user21 -n user21
+oc adm policy add-role-to-user monitoring-edit user22 -n user22
+oc adm policy add-role-to-user monitoring-edit user23 -n user23
+oc adm policy add-role-to-user monitoring-edit user24 -n user24
+oc adm policy add-role-to-user monitoring-edit user25 -n user25
+oc adm policy add-role-to-user monitoring-edit user26 -n user26
+oc adm policy add-role-to-user monitoring-edit user27 -n user27
+oc adm policy add-role-to-user monitoring-edit user28 -n user28
+oc adm policy add-role-to-user monitoring-edit user29 -n user29
+oc adm policy add-role-to-user monitoring-edit user30 -n user30

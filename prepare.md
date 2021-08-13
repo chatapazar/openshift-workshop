@@ -1,8 +1,8 @@
+setup_user.sh
+
 grant servicemonitor
 
-oc adm policy add-role-to-user monitoring-edit user1 -n user1
-oc adm policy add-role-to-user monitoring-edit user2 -n user2
-oc adm policy add-role-to-user monitoring-edit user3 -n user3
+setup_monitor.sh
 
 install web terminal operator
 
@@ -33,7 +33,7 @@ spec:
       nodeCount: 3 
       storage:
         storageClassName: gp2
-        size: 100G
+        size: 200G
       resources: 
         requests:
           memory: "8Gi"
