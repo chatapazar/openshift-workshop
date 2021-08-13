@@ -31,7 +31,7 @@
     sleep 10
   done
   ```
-  example result,
+  example result, check have result from 2 pods (Host value)
   ```bash
   Backend version:v1, Response:200, Host:backend-95647fbb8-kt886, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-95647fbb8-q9dqv, Status:200, Message: Hello, World
@@ -61,7 +61,7 @@
   - set Name: example
   - Minimum Pods: 1
   - Maximum Pods: 3
-  - CPU Utilization: 5%
+  - CPU Utilization: 2%
   ![](images/scale_13.png) 
 - click save, and wait until backend deployment change to Autoscaling
   ![](images/scale_14.png) 
