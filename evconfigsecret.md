@@ -100,6 +100,9 @@ The Secret object type provides a mechanism to hold sensitive information such a
 - at web terminal, test curret value of secret message : 'Not Found Secret'
   ```bash
   curl $BACKEND_URL/backend/showsecret
+  ```
+  example result
+  ```bash
   Backend version:v1, Response:200, Host:backend-95647fbb8-62584, Status:200, Message: Not Found Secret
   ```
 - click Secrets from left menu
