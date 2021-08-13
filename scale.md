@@ -61,7 +61,7 @@
   - set Name: example
   - Minimum Pods: 1
   - Maximum Pods: 3
-  - CPU Utilization: 2%
+  - CPU Utilization: 1%
   ![](images/scale_13.png) 
 - click save, and wait until backend deployment change to Autoscaling
   ![](images/scale_14.png) 
