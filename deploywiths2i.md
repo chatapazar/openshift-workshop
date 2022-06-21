@@ -3,7 +3,7 @@
 
 - [Deploy java application (quarkus) to openshift with s2i](#deploy-java-application-quarkus-to-openshift-with-s2i)
   - [Openshift Project](#openshift-project)
-  - [Deploy java Application to Openshift with OpenShift Developer Console (S2I)](#deploy-java-application-to-openshift-with-openshift-developer-console-s2i)
+  - [Deploy Application to Openshift with OpenShift Developer Console (S2I)](#deploy-application-to-openshift-with-openshift-developer-console-s2i)
   - [Test Rest API of Backend Application](#test-rest-api-of-backend-application)
   - [Next Step](#next-step)
 
@@ -34,9 +34,9 @@
     - click create, openshift console will change page to new project
     ![](images/work_5.png)
 
-## Deploy java Application to Openshift with OpenShift Developer Console (S2I)
+## Deploy Application to Openshift with OpenShift Developer Console (S2I)
 - click +Add menu in left pane
-- select From Git
+- select Add From Git
   ![](images/work_6.png)
 - in Import from Git page, input Git Repo URL with 'https://github.com/chatapazar/openshift-workshop.git'
 - wait until Openshift validate URL complete (page will show validated complete icon)

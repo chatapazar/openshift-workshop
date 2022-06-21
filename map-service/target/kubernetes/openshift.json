@@ -1,0 +1,160 @@
+[{
+  "apiVersion" : "v1",
+  "kind" : "Service",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/build-timestamp" : "2022-06-20 - 08:08:46 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-map-service",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "flight-tracker-map-service"
+  },
+  "spec" : {
+    "ports" : [ {
+      "name" : "http",
+      "port" : 80,
+      "targetPort" : 8090
+    } ],
+    "selector" : {
+      "app.kubernetes.io/name" : "flight-tracker-map-service",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "type" : "ClusterIP"
+  }
+},{
+  "apiVersion" : "image.openshift.io/v1",
+  "kind" : "ImageStream",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/build-timestamp" : "2022-06-20 - 08:08:46 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-map-service",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "flight-tracker-map-service"
+  },
+  "spec" : { }
+},{
+  "apiVersion" : "image.openshift.io/v1",
+  "kind" : "ImageStream",
+  "metadata" : {
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-map-service",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "name" : "s2i-java"
+  },
+  "spec" : {
+    "dockerImageRepository" : "fabric8/s2i-java"
+  }
+},{
+  "apiVersion" : "build.openshift.io/v1",
+  "kind" : "BuildConfig",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/build-timestamp" : "2022-06-20 - 08:08:46 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-map-service",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "flight-tracker-map-service"
+  },
+  "spec" : {
+    "output" : {
+      "to" : {
+        "kind" : "ImageStreamTag",
+        "name" : "flight-tracker-map-service:1.0.0-SNAPSHOT"
+      }
+    },
+    "source" : {
+      "binary" : { }
+    },
+    "strategy" : {
+      "sourceStrategy" : {
+        "from" : {
+          "kind" : "ImageStreamTag",
+          "name" : "s2i-java:2.3"
+        }
+      }
+    }
+  }
+},{
+  "apiVersion" : "apps.openshift.io/v1",
+  "kind" : "DeploymentConfig",
+  "metadata" : {
+    "annotations" : {
+      "app.openshift.io/vcs-url" : "<<unknown>>",
+      "app.quarkus.io/build-timestamp" : "2022-06-20 - 08:08:46 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-map-service",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.openshift.io/runtime" : "quarkus"
+    },
+    "name" : "flight-tracker-map-service"
+  },
+  "spec" : {
+    "replicas" : 1,
+    "selector" : {
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+      "app.kubernetes.io/name" : "flight-tracker-map-service"
+    },
+    "template" : {
+      "metadata" : {
+        "annotations" : {
+          "app.openshift.io/vcs-url" : "<<unknown>>",
+          "app.quarkus.io/build-timestamp" : "2022-06-20 - 08:08:46 +0000"
+        },
+        "labels" : {
+          "app.openshift.io/runtime" : "quarkus",
+          "app.kubernetes.io/version" : "1.0.0-SNAPSHOT",
+          "app.kubernetes.io/name" : "flight-tracker-map-service"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          }, {
+            "name" : "JAVA_APP_JAR",
+            "value" : "/deployments/flight-tracker-map-service-1.0.0-SNAPSHOT-runner.jar"
+          } ],
+          "image" : "ckongman/flight-tracker-map-service:1.0.0-SNAPSHOT",
+          "imagePullPolicy" : "Always",
+          "name" : "flight-tracker-map-service",
+          "ports" : [ {
+            "containerPort" : 8090,
+            "name" : "http",
+            "protocol" : "TCP"
+          } ]
+        } ]
+      }
+    },
+    "triggers" : [ {
+      "imageChangeParams" : {
+        "automatic" : true,
+        "containerNames" : [ "flight-tracker-map-service" ],
+        "from" : {
+          "kind" : "ImageStreamTag",
+          "name" : "flight-tracker-map-service:1.0.0-SNAPSHOT"
+        }
+      },
+      "type" : "ImageChange"
+    } ]
+  }
+}]

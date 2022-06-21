@@ -1,0 +1,86 @@
+[{
+  "apiVersion" : "v1",
+  "kind" : "Service",
+  "metadata" : {
+    "annotations" : {
+      "app.quarkus.io/commit-id" : "e5538289e5e50c69e8dfdb9502bfb5e6feeedaaf",
+      "app.quarkus.io/build-timestamp" : "2022-06-20 - 10:30:57 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-data-simulator",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "name" : "flight-tracker-data-simulator"
+  },
+  "spec" : {
+    "ports" : [ {
+      "name" : "http",
+      "port" : 80,
+      "targetPort" : 8080
+    } ],
+    "selector" : {
+      "app.kubernetes.io/name" : "flight-tracker-data-simulator",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "type" : "ClusterIP"
+  }
+},{
+  "apiVersion" : "apps/v1",
+  "kind" : "Deployment",
+  "metadata" : {
+    "annotations" : {
+      "app.quarkus.io/commit-id" : "e5538289e5e50c69e8dfdb9502bfb5e6feeedaaf",
+      "app.quarkus.io/build-timestamp" : "2022-06-20 - 10:30:57 +0000"
+    },
+    "labels" : {
+      "app.kubernetes.io/name" : "flight-tracker-data-simulator",
+      "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+    },
+    "name" : "flight-tracker-data-simulator"
+  },
+  "spec" : {
+    "replicas" : 1,
+    "selector" : {
+      "matchLabels" : {
+        "app.kubernetes.io/name" : "flight-tracker-data-simulator",
+        "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+      }
+    },
+    "template" : {
+      "metadata" : {
+        "annotations" : {
+          "app.quarkus.io/commit-id" : "e5538289e5e50c69e8dfdb9502bfb5e6feeedaaf",
+          "app.quarkus.io/build-timestamp" : "2022-06-20 - 10:30:57 +0000"
+        },
+        "labels" : {
+          "app.kubernetes.io/name" : "flight-tracker-data-simulator",
+          "app.kubernetes.io/version" : "1.0.0-SNAPSHOT"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "command" : [ "java", "-Dquarkus.http.host=0.0.0.0", "-Djava.util.logging.manager=org.jboss.logmanager.LogManager", "-jar", "/deployments/flight-tracker-data-simulator-1.0.0-SNAPSHOT-runner.jar" ],
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          }, {
+            "name" : "JAVA_APP_JAR",
+            "value" : "/deployments/flight-tracker-data-simulator-1.0.0-SNAPSHOT-runner.jar"
+          } ],
+          "image" : "ckongman/flight-tracker-data-simulator:1.0.0-SNAPSHOT",
+          "imagePullPolicy" : "Always",
+          "name" : "flight-tracker-data-simulator",
+          "ports" : [ {
+            "containerPort" : 8080,
+            "name" : "http",
+            "protocol" : "TCP"
+          } ]
+        } ]
+      }
+    }
+  }
+}]

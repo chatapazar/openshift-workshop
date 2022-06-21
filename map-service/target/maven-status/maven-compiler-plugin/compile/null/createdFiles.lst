@@ -1,0 +1,10 @@
+com/gwenneg/flighttracker/MapBroadcastService.class
+com/gwenneg/flighttracker/PointToPointFlight.class
+com/gwenneg/flighttracker/TransponderData.class
+com/gwenneg/flighttracker/Airport.class
+com/gwenneg/flighttracker/AirportToAirportFlight.class
+com/gwenneg/flighttracker/Point.class
+com/gwenneg/flighttracker/DataSimulatorClient.class
+META-INF/panache-archive.marker
+com/gwenneg/flighttracker/RadarData.class
+com/gwenneg/flighttracker/FrontendResource.class

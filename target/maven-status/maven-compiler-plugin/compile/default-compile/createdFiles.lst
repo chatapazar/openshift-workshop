@@ -1,0 +1,10 @@
+org/acme/microprofile/health/DataBaseStatusBean.class
+org/acme/rest/json/FruitResource.class
+org/acme/getting/started/GreetingResource.class
+org/acme/rest/json/Fruit.class
+org/acme/microprofile/health/DatabaseResource.class
+org/acme/getting/started/GreetingService.class
+org/acme/getting/started/BackendResource.class
+org/acme/getting/started/ApplicationConfig.class
+org/acme/microprofile/health/SimpleHealthCheck.class
+org/acme/microprofile/health/DatabaseConnectionHealthCheck.class

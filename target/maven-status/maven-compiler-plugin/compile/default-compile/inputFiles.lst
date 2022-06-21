@@ -1,0 +1,10 @@
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/getting/started/GreetingResource.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/microprofile/health/SimpleHealthCheck.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/microprofile/health/DatabaseConnectionHealthCheck.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/getting/started/ApplicationConfig.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/microprofile/health/DataBaseStatusBean.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/getting/started/BackendResource.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/microprofile/health/DatabaseResource.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/rest/json/Fruit.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/rest/json/FruitResource.java
+/Users/ckongman/work/workspace/openshift-workshop/src/main/java/org/acme/getting/started/GreetingService.java

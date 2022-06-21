@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.quarkus.io/commit-id: 86bf476d95733c88bcfa4b4e3459adaefbef9b1f
+    app.quarkus.io/build-timestamp: 2022-06-21 - 06:12:50 +0000
+  labels:
+    app.kubernetes.io/name: flight-tracker-data-aggregator
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  name: flight-tracker-data-aggregator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flight-tracker-data-aggregator
+      app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  template:
+    metadata:
+      annotations:
+        app.quarkus.io/commit-id: 86bf476d95733c88bcfa4b4e3459adaefbef9b1f
+        app.quarkus.io/build-timestamp: 2022-06-21 - 06:12:50 +0000
+      labels:
+        app.kubernetes.io/name: flight-tracker-data-aggregator
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    spec:
+      containers:
+        - env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          image: ckongman/flight-tracker-data-aggregator:1.0.0-SNAPSHOT
+          imagePullPolicy: Always
+          name: flight-tracker-data-aggregator
