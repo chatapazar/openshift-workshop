@@ -1,5 +1,11 @@
 # Live Flight Tracker Demo
+<!-- TOC -->
 
+- [Live Flight Tracker Demo](#live-flight-tracker-demo)
+  - [Architecture of the demo](#architecture-of-the-demo)
+  - [Step by Step to Deploy Live Flight Tracker on OpenShift](#step-by-step-to-deploy-live-flight-tracker-on-openshift)
+
+<!-- /TOC -->
 ## Architecture of the demo
 
 ![Architecture](images/architecture.png)
@@ -11,6 +17,7 @@
 - data-aggregator: streams processing service for aggregate (merge) radar data and transponder data to flight data and put it back to kafka for display from map service
 
 ## Step by Step to Deploy Live Flight Tracker on OpenShift
+
 
 
 1. Create Project for Live Flight Tracker

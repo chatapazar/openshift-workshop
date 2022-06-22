@@ -1,7 +1,7 @@
-# Deploy java application (quarkus) to openshift with s2i
+# Deploy application (quarkus) to openshift with s2i
 <!-- TOC -->
 
-- [Deploy java application (quarkus) to openshift with s2i](#deploy-java-application-quarkus-to-openshift-with-s2i)
+- [Deploy application (quarkus) to openshift with s2i](#deploy-application-quarkus-to-openshift-with-s2i)
   - [Openshift Project](#openshift-project)
   - [Deploy Application to Openshift with OpenShift Developer Console (S2I)](#deploy-application-to-openshift-with-openshift-developer-console-s2i)
   - [Test Rest API of Backend Application](#test-rest-api-of-backend-application)
@@ -27,16 +27,16 @@
 - Optional: How to Create Project (Don't create project in this workshop, we prepare project for you now!)
   - create project with your username such as 'user1'  
     - go to dropdown at Project: All Projects
-    - click Create Project (Please use your username to Project name!!!)
-    ![](images/work_3.png)
-    - set Name*= 'userx', Display Name = 'userx', Description = 'userx workshop'
+    - click Create Project 
+    ![](images/deploy_4.png)
+    - set Name*= 'userx', Display Name = 'userx', Description = 'userx workshop' (Please use your username to Project name!!!)
     ![](images/work_4.png)
     - click create, openshift console will change page to new project
-    ![](images/work_5.png)
+    ![](images/work_3.png)
 
 ## Deploy Application to Openshift with OpenShift Developer Console (S2I)
 - click +Add menu in left pane
-- select Add From Git
+- select Import from Git
   ![](images/work_6.png)
 - in Import from Git page, input Git Repo URL with 'https://github.com/chatapazar/openshift-workshop.git'
 - wait until Openshift validate URL complete (page will show validated complete icon)
@@ -49,8 +49,8 @@
     - Source Secret: provide user/password for private repository
   ![](images/work_26.png)  
 - OpenShift S2I will automatic select Builder Image from your source code, in case s2i can't detect base image. you can manual select.
-- developer can select builder image versio from dropdown list such as java application can select base image for jdk8 or jdk11 
-- for this workshop, Please select 'openjdk-11-ubi8'  or Red Hat OpenJDK 11 (UBI 8)
+- developer can select builder image version from dropdown list such as java application can select base image for jdk8 or jdk11 
+- for this workshop, Please select 'openjdk-11-ubi8'  or Red Hat OpenJDK 11 (UBI 8) (default is openjdk-17-ubi8, it's new jdk version. it don't match with simple code in this demo! :D )
   ![](images/work_8.png)
 - next, in general section set
   - Application name: backend
@@ -115,7 +115,7 @@
     ```
 - test call backend service api (REST)
   ```bash
-  curl http://$(oc get route backend -o jsonpath='{.spec.host}')/backend
+  curl https://$(oc get route backend -o jsonpath='{.spec.host}')/backend
   ```
   example of result
   ```bash
