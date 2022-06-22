@@ -185,7 +185,6 @@
    ![](images/flight/flight-40.png)
 10. Test Live Flight Track Demo
    - in topology view, click route icon of flight-map-service for open web application
-   <img src="images/flight/flight-44.png" alt="test route" width="200"/>
    - browser will show Live Flight Tracer demo
    ![](images/flight/flight-41.png)
    - click checkbox show slifht creation form and show websocket log
