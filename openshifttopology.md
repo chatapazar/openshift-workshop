@@ -1,14 +1,14 @@
-# Openshift Topology
+# Basic Openshift Topology
 <!-- TOC -->
 
-- [Openshift Topology](#openshift-topology)
-  - [Prerequisite](#prerequisite)
-  - [Pods](#pods)
-  - [Labels](#labels)
-  - [Deployment](#deployment)
-  - [Service](#service)
-  - [Route](#route)
-  - [Next Step](#next-step)
+- [Basic Openshift Topology](#basic-openshift-topology)
+    - [Prerequisite](#prerequisite)
+    - [Pods](#pods)
+    - [Labels](#labels)
+    - [Deployment](#deployment)
+    - [Service](#service)
+    - [Route](#route)
+    - [Next Step](#next-step)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -24,6 +24,8 @@ To launch a pod using the container imagequay.io/openshiftlabs/simpleservice:0.5
 ```bash
 oc run sise --image=quay.io/openshiftlabs/simpleservice:0.5.0 --port=9876
 ```
+wait until sise pod circle change to dark blue
+![](images/basic_2.png)
 Check to see if the pod is running:
 
 ```bash
@@ -48,7 +50,7 @@ This call should produce the output:
 
 or use Openshift Web Console to terminal to this Pod
 - In Topology Menu, click Pod 'sise'
-  ![](images/topology_1.png) 
+  ![](images/basic_2.png) 
 - In Pod sise information (right side), click pods 'sise'
   ![](images/topology_2.png) 
 - In Pod detail page, click tab 'Terminal'
@@ -143,18 +145,16 @@ A deployment is a supervisor for pods, giving you fine-grained control over how 
   ```bash
   oc apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/main/specs/deployments/d10.yaml
   ```
-  wait until redeploy complete!
+  wait until redeploy complete!, in Topology , you will can see deployment redeploy from 0.9 to 1.0
 - run command to check have redeploy to new version
   ```bash
-  oc get pods
+  oc get pods -l app=sise
   ```
   result of command
   ```bash
   NAME                                         READY   STATUS        RESTARTS   AGE
   sise-deploy-67fd84bd5c-cvwpk                 1/1     Running       0          35s
   sise-deploy-67fd84bd5c-wn9zh                 1/1     Running       0          38s
-  sise-deploy-747848cd97-j2m9q                 0/1     Terminating   0          143m
-  sise-deploy-747848cd97-kr9kd                 1/1     Terminating   0          143m
   ```
 - To verify that if the new 1.0 version is really available
   ```bash
@@ -169,6 +169,18 @@ A deployment is a supervisor for pods, giving you fine-grained control over how 
   ```bash
   oc rollout history deploy/sise-deploy
   ```
+  result
+  ```bash
+  deployment.apps/sise-deploy 
+  REVISION  CHANGE-CAUSE
+  1         <none>
+  2         <none>
+  ```
+- to rollback to the last successful deployed revision of your configuration
+  ```bash
+  oc rollout undo deploy/sise-deploy
+  ```
+  wait until reploy complete (sise-deploy circle change to dark blue color), and retest call with curl command
 - Clean Up
   ```bash
   oc delete deploy sise-deploy
@@ -178,13 +190,15 @@ A deployment is a supervisor for pods, giving you fine-grained control over how 
 Services
 A service is an abstraction for pods, providing a stable, so called virtual IP (VIP) address. While pods may come and go and with it their IP addresses, a service allows clients to reliably connect to the containers running in the pod using the VIP. The "virtual" in VIP means it is not an actual IP address connected to a network interface, but its purpose is purely to forward traffic to one or more pods. Keeping the mapping between the VIP and the pods up-to-date is the job of kube-proxy, a process that runs on every node, which queries the API server to learn about new services in the cluster.  
 Let's create a new pod supervised by a replication controller and a service along with it:
-- run below command in web terminal : 
+- run below command in web terminal : 1st commond for deployment object and 2nd command for service
   - https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
   - https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/svc.yaml
   ```bash
   oc apply -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/deployment.yaml
   oc apply -f https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/manifest/svc.yaml
   ```
+- see deployment, pod and service in topology view
+  ![](image/../images/topology_1.png)
 - Verify the pod is running:
   ```bash
   oc get pods -l app=sise
@@ -202,12 +216,10 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```bash
   ...
     Status:       Running
-    IP:           10.131.0.38
+    IP:           10.131.0.51
     IPs:
-    IP:           10.131.0.38
-    Controlled By:  ReplicaSet/sise-747848cd97
-    Containers:
-    sise:
+      IP:           10.131.0.51
+    Controlled By:  ReplicaSet/sise-558d96fc8c
   ...
   ```
 - You can, from within the cluster, access the pod directly via its assigned IP (change pod name and ip address from describe pod):
@@ -230,6 +242,14 @@ Let's create a new pod supervised by a replication controller and a service alon
   ```bash
   oc get pods -l app=sise
   ```
+  sample output
+  ```bash
+  NAME                    READY   STATUS    RESTARTS   AGE
+  sise-558d96fc8c-7nblw   1/1     Running   0          18s
+  sise-558d96fc8c-r7wsw   1/1     Running   0          13m
+  ```
+  see pod in deployment info page
+  ![](images/basic_3.png)
 - test call service, you can see out put from 2 pods
   ```bash
   oc exec $POD -t -- curl -s simpleservice/info
@@ -285,4 +305,4 @@ route exposes a service at a host name, like www.example.com, so that external c
   ```
 
 ## Next Step
-- [Environment Variable, ConfigMap, Secret](evconfigsecret.md)
+- [Configuration Management with Environment Variable, Configmap & Secret](evconfigsecret.md)

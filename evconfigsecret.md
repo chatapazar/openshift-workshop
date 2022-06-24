@@ -1,7 +1,7 @@
-# Environment Variable, ConfigMap, Secret
+# Configuration Management with Environment Variable, Configmap & Secret
 <!-- TOC -->
 
-- [Environment Variable, ConfigMap, Secret](#environment-variable-configmap-secret)
+- [Configuration Management with Environment Variable, Configmap & Secret](#configuration-management-with-environment-variable-configmap--secret)
   - [Prerequisite](#prerequisite)
   - [Environment Variable](#environment-variable)
   - [Configmag](#configmag)
@@ -23,14 +23,14 @@ You can set environment variables for containers running in a pod. Additionally,
     ```yaml
     app.backend=https://httpbin.org/status/200
     ```
-  - test call backend service
+  - test call backend service in web terminal console 
     ```bash
     curl -v https://httpbin.org/status/200
     curl -v https://httpbin.org/status/400
     ```
 - Check Current Environment, Test with below command
     ```bash
-    BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+    BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
     curl $BACKEND_URL/backend
     ```
     sample output, see Response:200
@@ -47,7 +47,7 @@ You can set environment variables for containers running in a pod. Additionally,
     ![](images/env_5.png)
 - back to web terminal, test call backend again
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
   check output change, Response:400 
@@ -86,7 +86,7 @@ The ConfigMap object provides mechanisms to inject containers with configuration
   ![](images/env_5.png)
 - back to web terminal, test call backend again
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
   check output change, Response:200 

@@ -285,7 +285,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```
 - test call backend api from route, call 2-4 times to check response from both pods
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
   example response
@@ -344,7 +344,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
    ```
 - test call backend again
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
   example result, call 2-4 tiems, have only response from 1 pod.
@@ -371,7 +371,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```
 - re-test call backend again, test call 2-4 times
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
   example output, response from 2 pods again.

@@ -3,9 +3,10 @@
 ![](images/workshop.png)
 
 ## Table of Contents
+- [Prerequisite for workshop ](prereq.md)
 - [Deploy application to openshift with s2i](deploywiths2i.md)
 - [Basic Openshift Topology](openshifttopology.md)
-- [Configuration Management with Configmap & Secret](evconfigsecret.md)
+- [Configuration Management with Environment Variable, Configmap & Secret](evconfigsecret.md)
 - [Application Health check](apphealth.md)
 - [Scaling up your application in order to handle workload](scale.md)
 - [OOTB Application Monitoring & User workload monitoring](monitor.md)

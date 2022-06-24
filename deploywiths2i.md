@@ -124,4 +124,4 @@
   - remark: Host name in result of this api is name of Pod, please check and verify it!
 - if done!, You are ready for the next step.
 ## Next Step
-- [Openshift Topology](openshifttopology.md)
+- [Basic Openshift Topology](openshifttopology.md)
