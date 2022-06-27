@@ -1,7 +1,7 @@
-# Scale Application with OpenShift
+# Scaling up your application in order to handle workload
 <!-- TOC -->
 
-- [Scale Application with OpenShift](#scale-application-with-openshift)
+- [Scaling up your application in order to handle workload](#scaling-up-your-application-in-order-to-handle-workload)
   - [Prerequisite](#prerequisite)
   - [Manual Scale Application](#manual-scale-application)
   - [Auto Scale Application](#auto-scale-application)
@@ -9,7 +9,7 @@
 
 <!-- /TOC -->
 ## Prerequisite
-- Complete [Deploy java application (quarkus) to openshift with s2i](deploywiths2i.md)
+- Complete [Deploy application to openshift with s2i](deploywiths2i.md)
 - Go to your project (same as your username)
 - Open Web Terminal by click '>_' on top of OpenShift Web Console
 - use web terminal to run command line
@@ -21,9 +21,9 @@
 - wait until application scale to 2 Pods (circle around Duke icon change to dark blue)
   ![](images/scale_2.png)
   ![](images/scale_3.png)
-- Test load to application, go to web terminal, run below command
+- Test load to application, go to web terminal, run below command 
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   while [  1  ];
   do
     curl $BACKEND_URL/backend
@@ -69,7 +69,7 @@
 - go to web terminal
 - run load test command
   ```bash
-  BACKEND_URL=http://$(oc get route backend -o jsonpath='{.spec.host}')
+  BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   while [  1  ];
   do
     curl $BACKEND_URL/backend
@@ -80,7 +80,7 @@
   ![](images/scale_15.png)   
 - click resources tab, see 3 pods auto scale
   ![](images/scale_16.png)
-- click monitoring tab to view CPU usage
+- click Observe tab to view CPU usage 
   ![](images/scale_17.png)
 - back to web terminal, input 'ctrl-c' to terminate load test command
 - wait 5 minute, autoscaled will reduce pod to 1.
@@ -94,5 +94,5 @@
   
 
 ## Next Step
-- [Application Monitoring](monitor.md)
+- [OOTB Application Monitoring & User workload monitoring](monitor.md)
 

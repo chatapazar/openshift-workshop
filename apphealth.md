@@ -12,7 +12,7 @@
 
 <!-- /TOC -->
 ## Prerequisite
-- Complete [Deploy java application (quarkus) to openshift with s2i](deploywiths2i.md)
+- Complete [Deploy application to openshift with s2i](deploywiths2i.md)
 - Go to your project (same as your username)
 - Open Web Terminal by click '>_' on top of OpenShift Web Console
 - use web terminal to run command line
@@ -393,5 +393,5 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ![](images/health_8.png)  
 
 ## Next Step
-- [Scale Application with OpenShift](scale.md)
+- [Scaling up your application in order to handle workload](scale.md)
 

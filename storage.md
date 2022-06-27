@@ -9,7 +9,7 @@
 
 <!-- /TOC -->
 ## Prerequisite
-- Complete [Deploy java application (quarkus) to openshift with s2i](deploywiths2i.md)
+- Complete [Deploy application to openshift with s2i](deploywiths2i.md)
 - Go to your project (same as your username)
 - Open Web Terminal by click '>_' on top of OpenShift Web Console
 - use web terminal to run command line
