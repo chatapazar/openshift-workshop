@@ -48,6 +48,7 @@
     - Context dir: in case source code don't place in root of git such as /code
     - Source Secret: provide user/password for private repository
   ![](images/work_26.png)  
+- Click Edit Import Strategy for change default Builder Image (pencil icon)
 - OpenShift S2I will automatic select Builder Image from your source code, in case s2i can't detect base image. you can manual select.
 - developer can select builder image version from dropdown list such as java application can select base image for jdk8 or jdk11 
 - for this workshop, Please select 'openjdk-11-ubi8'  or Red Hat OpenJDK 11 (UBI 8) (default is openjdk-17-ubi8, it's new jdk version. it don't match with simple code in this demo! :D )
@@ -69,6 +70,9 @@
   - set Memory Request: 256 Mi
   - set Memory Limit:   512 Mi
   ![](images/work_12.png)
+  - click 'Resource type' link
+  - select 'Deployment' in drop down list
+  ![](images/work_121.png)
 - Click Create, Console will back to Topology Page
   ![](images/work_13.png)
 - Click at Duke icon, Dev Console will show Deployment information
@@ -80,6 +84,7 @@
 - wait until build complete, see build backend-1 change from running to complete (3-5 minutes)
   ![](images/work_18.png)
 - after build complete, openshift will take the image from the build to deploy and create a pod as shown in the picture.
+- click 'Topology' menu from left side for back to Topology view again
   ![](images/work_19.png)  
 - wait until Pod 'backend-xxxx-xxx' change status to Running
   ![](images/work_20.png) 
@@ -111,7 +116,7 @@
     ```
 - if current project is not your project (such as result is not 'Using project "user1"'), use below command to set current project to command line context
     ```bash
-    oc project user1
+    oc project <your project>
     ```
 - test call backend service api (REST)
   ```bash

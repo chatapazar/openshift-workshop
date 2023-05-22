@@ -89,3 +89,8 @@
             requests:
               storage: 50Gi
   ```
+
+- check with
+  ```bash
+  oc  get pod -n openshift-user-workload-monitoring
+  ```
