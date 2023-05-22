@@ -52,7 +52,7 @@
   ![](images/storage_11.png)
 - in add storage, select
   - Persistent Volume Claim: create new claim
-  - storage class: gp2
+  - storage class: gp3-csi
   - Persistent Volume Claim Name: 'userx-cliam' (change userx to your user name)
   - access mode: Single User(RWO)
   - size: 1 GiB
