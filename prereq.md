@@ -70,3 +70,22 @@
 ## setup user workload monitoring
 - install user workload monitoring
   https://github.com/rhthsa/openshift-demo/blob/main/application-metrics.md
+
+  ```yaml
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: cluster-monitoring-config
+    namespace: openshift-monitoring
+  data:
+    config.yaml: |
+      enableUserWorkload: true
+      prometheusK8s: 
+        volumeClaimTemplate:
+        spec:
+          storageClassName: gp3-csi
+          volumeMode: Filesystem
+          resources:
+            requests:
+              storage: 50Gi
+  ```
