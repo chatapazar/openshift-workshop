@@ -212,7 +212,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```bash
   oc get pods -l app=backend
   ```
-  example result, check restarts is 0
+  example result, check restarts value (0,1,2 or ?)
   ```bash
   NAME                       READY   STATUS    RESTARTS   AGE
   backend-58769d5765-dw6fc   1/1     Running   0          15h
@@ -239,7 +239,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```bash
   oc get pods -l app=backend
   ```
-  example result, check restarts is 1
+  example result, check restarts is ?
   ```bash
   NAME                                         READY   STATUS      RESTARTS   AGE
   backend-58769d5765-dw6fc                     1/1     Running     1          15h
