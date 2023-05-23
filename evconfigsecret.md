@@ -4,7 +4,7 @@
 - [Configuration Management with Environment Variable, Configmap \& Secret](#configuration-management-with-environment-variable-configmap--secret)
   - [Prerequisite](#prerequisite)
   - [Environment Variable](#environment-variable)
-  - [Configmag](#configmag)
+  - [Configmap](#configmap)
   - [Secret](#secret)
   - [Next Step](#next-step)
 
@@ -55,7 +55,7 @@ You can set environment variables for containers running in a pod. Additionally,
   Backend version:v1, Response:400, Host:backend-6cf95f994d-cgxsb, Status:400, Message: Hello, World
   ```
 
-## Configmag
+## Configmap
 Many applications require configuration using some combination of configuration files, command line arguments, and environment variables. These configuration artifacts should be decoupled from image content in order to keep containerized applications portable.
 
 The ConfigMap object provides mechanisms to inject containers with configuration data while keeping containers agnostic of OpenShift Container Platform. A ConfigMap can be used to store fine-grained information like individual properties or coarse-grained information like entire configuration files or JSON blobs.

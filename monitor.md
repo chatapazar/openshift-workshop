@@ -172,7 +172,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
     - name: backend
       rules:
       - alert: HighLatency
-        expr: application_org_acme_getting_started_BackendResource_timeBackend_max_seconds>0.2
+        expr: application_org_acme_getting_started_BackendResource_timeBackend_max_seconds>0.5
         labels:
           severity: 'critical'
         annotations:
