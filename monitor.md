@@ -1,7 +1,7 @@
 # OOTB Application Monitoring, Alert & User workload monitoring
 <!-- TOC -->
 
-- [OOTB Application Monitoring, Alert & User workload monitoring](#ootb-application-monitoring-alert--user-workload-monitoring)
+- [OOTB Application Monitoring, Alert \& User workload monitoring](#ootb-application-monitoring-alert--user-workload-monitoring)
   - [Prerequisite](#prerequisite)
   - [OpenShift Default Monitoring](#openshift-default-monitoring)
   - [Review Application Performance Metric Code](#review-application-performance-metric-code)
@@ -172,7 +172,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
     - name: backend
       rules:
       - alert: HighLatency
-        expr: application_org_acme_getting_started_BackendResource_timeBackend_max_seconds>1
+        expr: application_org_acme_getting_started_BackendResource_timeBackend_max_seconds>0.2
         labels:
           severity: 'critical'
         annotations:
