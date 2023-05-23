@@ -14,7 +14,7 @@
   - confirm URL from instructor
 - login to openshift with your username/password
   - username: 'userx'
-  - password: openshift
+  - password: 'password from register'
   ![](images/work_1.png)
 - select Developer Perspective from left menu (if openshift don't default page for you)
   ![](images/work_2.png)
