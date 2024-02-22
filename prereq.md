@@ -68,29 +68,8 @@
 - run [setup_monitor.sh](bin/setup_monitor.sh)
 
 ## setup user workload monitoring
-- install user workload monitoring
-  https://github.com/rhthsa/openshift-demo/blob/main/application-metrics.md
-
-  ```yaml
-  apiVersion: v1
-  kind: ConfigMap
-  metadata:
-    name: cluster-monitoring-config
-    namespace: openshift-monitoring
-  data:
-    config.yaml: |
-      enableUserWorkload: true
-      prometheusK8s: 
-        volumeClaimTemplate:
-        spec:
-          storageClassName: gp3-csi
-          volumeMode: Filesystem
-          resources:
-            requests:
-              storage: 50Gi
-  ```
-
-- check with
-  ```bash
-  oc  get pod -n openshift-user-workload-monitoring
+- run and check
+  ```sh
+  oc apply -f user-workload-monitoring.yaml
+  oc get po -n openshift-user-workload-monitoring
   ```
