@@ -36,7 +36,7 @@
         elasticsearch:
           nodeCount: 3 
           storage:
-            storageClassName: gp3-csi
+            storageClassName: ocs-external-storagecluster-ceph-rbd
             size: 200G
           resources: 
             requests:
