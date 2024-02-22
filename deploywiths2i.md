@@ -70,10 +70,7 @@
   - set Memory Request: 256 Mi
   - set Memory Limit:   512 Mi
   ![](images/work_12.png)
-  - click 'Resource type' link
-  - select 'Deployment' in drop down list
-  ![](images/work_121.png)
-- Click Create, Console will back to Topology Page
+  - Click Create, Console will back to Topology Page
   ![](images/work_13.png)
 - Click at Duke icon, Dev Console will show Deployment information
   ![](images/work_14.png)
