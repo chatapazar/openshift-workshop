@@ -56,7 +56,7 @@
 - next, in general section set
   - Application name: backend
   - Name: backend
-  - Resources: select Deployment (deployment for standard Kubernetes, DeploymentConfig is deployment with extension feature from OpenShift)
+  - Resources: select <strong>Deployment</strong> (default is serverless, deployment for standard Kubernetes, DeploymentConfig is deployment with extension feature from OpenShift, user can set default in user reference menu!!!)
   - Advanced Options: checked Create a Route to the Application
   ![](images/work_9.png)
 - before click create, in advanced option
