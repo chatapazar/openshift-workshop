@@ -10,7 +10,7 @@
 <!-- /TOC -->
 ## Install Operator
 - Web Terminal
-- AMQ Streams
+- AMQ Streams 2.2 !!!
 - Serverless (create knative-serving in project knative-serving)
 - ElasticSearch
 - ClusterLogging
