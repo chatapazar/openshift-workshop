@@ -141,7 +141,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
-- click Monitor in left menu, select Metrics Tab
+- click Observe in left menu, select Metrics Tab
   ![](images/mon_16.png)         
 - in select query, change to custom query, type 'app' and wait auto suggesstion
   ![](images/mon_17.png) 
