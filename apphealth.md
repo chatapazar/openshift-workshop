@@ -259,7 +259,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```bash
   NAME                      READY   STATUS    RESTARTS   AGE
   backend-87784db56-2642v   1/1     Running   0          2m38s
-  backend-87784db56-swg4m   1/1     Running   0          6m19s
+  backend-87784db56-swg4m   1/1     Running   1          6m19s
   ```
 - check service call to both pods
   ```bash

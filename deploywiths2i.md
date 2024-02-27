@@ -65,8 +65,8 @@
   - add label 'app=backend'
   ![](images/work_11.png)
   - click 'Resource limits' link
-  - set CPU Request: 100 millicores
-  - set CPU Limit:   200 millicores
+  - set CPU Request: 50 millicores
+  - set CPU Limit:   100 millicores
   - set Memory Request: 256 Mi
   - set Memory Limit:   512 Mi
   ![](images/work_12.png)
