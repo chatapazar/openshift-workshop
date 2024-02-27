@@ -1,10 +1,11 @@
 # Basic Serverless, auto scale up & scale down by request
 <!-- TOC -->
 
-- [Basic Serverless, auto scale up & scale down by request](#basic-serverless-auto-scale-up--scale-down-by-request)
+- [Basic Serverless, auto scale up \& scale down by request](#basic-serverless-auto-scale-up--scale-down-by-request)
   - [Prerequisite](#prerequisite)
   - [Change your application to Serverless](#change-your-application-to-serverless)
-  - [Next Step](#next-step)
+  - [Congratulation, You Complete This LAB!!!](#congratulation-you-complete-this-lab)
+  - [Optional!!! --\> Next Step](#optional----next-step)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -44,7 +45,9 @@
 - test call application again by click route, serverless will automatic start pod.
   ![](images/serverless_9.png)
 
-## Next Step
+## Congratulation, You Complete This LAB!!!
+
+## Optional!!! --> Next Step
 - [Complex Cloud-Native Application with Live Flight Track Demo](liveflight.md)
 
 

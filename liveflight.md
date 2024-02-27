@@ -2,13 +2,9 @@
 <!-- TOC -->
 
 - [Live Flight Tracker Demo](#live-flight-tracker-demo)
-  - [Architecture of the demo](#architecture-of-the-demo)
   - [Step by Step to Deploy Live Flight Tracker on OpenShift](#step-by-step-to-deploy-live-flight-tracker-on-openshift)
 
 <!-- /TOC -->
-## Architecture of the demo
-
-![Architecture](images/architecture.png)
 
 - map-service: web application with websocket, rest api for interact with browser for show and receive command for simulate live flight tracker
 - postgresql: relational database for airport data
@@ -81,21 +77,24 @@
    - wait until postgresql change to dark blue circle
    ![](images/flight/flight-13.png)
 5. Deploy Data-Aggregator from Container Image
-   - click +Add left menu, select Container images
-   ![](images/flight/flight-18.png)
-   - in deploy image page, 
-     - select Image name from external registry
-     - type "quay.io/chatapazar1/data-aggregator"
-     - runtime icon: change to quarkus
-     - Application: select Ceate Application
-     - Application Name: "flight-data-aggregator"
-     - Name: "flight-data-aggregator"
-     - resource: Deployment
-     - target port: 8080
-     - uncheck create a route to the application
-     - click create
-   ![](images/flight/flight-19.png)
-   ![](images/flight/flight-20.png)
+   - click +Add left menu, select from Git Repository (S2I/OpenShift Build)
+   ![](images/flight/flight-23.png)
+   - in Import from Git page, set Git Repo URL to : https://github.com/chatapazar/openshift-workshop.git
+   - click show advanced git options
+   - set Context dir to : /data-simulator
+   - select Import Strategy to Builder Image
+   ![](images/flight/flight-new-1.png)
+   - select Java
+   - select Builder Image version to : openjdk-11-ubi8
+   - in General, Application, select Create Application
+   - Application: select Ceate Application
+   - Application Name: "flight-data-aggregator"
+   - Name: "flight-data-aggregator"
+   - resource: Deployment
+   - target port: 8080
+   - uncheck create a route to the application
+   - click create
+   ![](images/flight/flight-new-2.png)
    - wait until flight-data-aggregator circle change to dark blue color
    ![](images/flight/flight-21.png)
    - click flight-data-aggregator, select resources tab, click view logs in first port
