@@ -3,8 +3,13 @@
 
 - [Deploy application (quarkus) to openshift with s2i](#deploy-application-quarkus-to-openshift-with-s2i)
   - [Openshift Project](#openshift-project)
+  - [Set Default OpenShift Console!!!](#set-default-openshift-console)
   - [Deploy Application to Openshift with OpenShift Developer Console (S2I)](#deploy-application-to-openshift-with-openshift-developer-console-s2i)
   - [Test Rest API of Backend Application](#test-rest-api-of-backend-application)
+  - [Next Step](#next-step)
+
+<!-- /TOC -->
+<!-- /TOC -->
   - [Next Step](#next-step)
 
 <!-- /TOC -->
@@ -33,6 +38,16 @@
     ![](images/work_4.png)
     - click create, openshift console will change page to new project
     ![](images/work_3.png)
+
+
+## Set Default OpenShift Console!!!
+- click user at top-right of OpenShift Console, select User References
+  ![](images/user-set-1.png)
+- In General Section, you can change theme from dark mode (default) to light mode
+  ![](images/user-set-2.png)
+- In Application Section, set default resource type from Serverless to Deployment
+  ![](images/user-set-3.png)
+
 
 ## Deploy Application to Openshift with OpenShift Developer Console (S2I)
 - click +Add menu in left pane
