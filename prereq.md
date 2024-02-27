@@ -10,7 +10,7 @@
 <!-- /TOC -->
 ## Install Operator
 - Web Terminal
-- AMQ Streams 2.2 !!!
+- AMQ Streams 2.2 channel, version 2.2.1-7 !!!
 - Serverless (create knative-serving in project knative-serving)
 - ElasticSearch
 - ClusterLogging
