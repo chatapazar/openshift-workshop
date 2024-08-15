@@ -1,62 +1,63 @@
 # Prerequisite for workshop (Instructor Only)
-<!-- TOC -->
 
-- [Prerequisite for workshop (Instructor Only)](#prerequisite-for-workshop-instructor-only)
-  - [Install Operator](#install-operator)
-  - [Create User](#create-user)
-  - [Grant ServiceMonitor to User](#grant-servicemonitor-to-user)
-  - [setup user workload monitoring](#setup-user-workload-monitoring)
-
-<!-- /TOC -->
 ## Install Operator
-- Web Terminal
-- AMQ Streams 2.2 channel, version 2.2.1-7 !!!
+
+- Login wih Cluster Admin for Install Operator
+- Red Hat Streams for Apache Kafka 2.2 channel, version 2.2.1-7 !!!
 - Serverless (create knative-serving in project knative-serving)
+- Web Terminal
 - ElasticSearch
-- ClusterLogging
+- OpenShift Logging 5.9
+
+## Config Cluster Logging (EFK)
+
   - required 3 node of worker
+  - change storageClassName to your storage in cluster
   - create clusterlogging instance
-    ```yaml
-    apiVersion: "logging.openshift.io/v1"
-    kind: "ClusterLogging"
-    metadata:
-      name: "instance" 
-      namespace: "openshift-logging"
-    spec:
-      managementState: "Managed"  
-      logStore:
-        type: "elasticsearch"  
-        retentionPolicy: 
-          application:
-            maxAge: 3d
-          infra:
-            maxAge: 3d
-          audit:
-            maxAge: 3d
-        elasticsearch:
-          nodeCount: 3 
-          storage:
-            storageClassName: ocs-external-storagecluster-ceph-rbd
-            size: 200G
-          resources: 
-            requests:
-              memory: "8Gi"
-          proxy: 
-            resources:
-              limits:
-                memory: 256Mi
-              requests:
-                memory: 256Mi
-          redundancyPolicy: "SingleRedundancy"
-      visualization:
-        type: "kibana"  
-        kibana:
-          replicas: 1
-      collection:
-        logs:
-          type: "fluentd"  
-          fluentd: {}
-    ```
+    
+```yaml
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogging
+metadata:
+  name: instance 
+  namespace: openshift-logging
+spec:
+  managementState: Managed 
+  logStore:
+    type: elasticsearch 
+    retentionPolicy: 
+      application:
+        maxAge: 1d
+      infra:
+        maxAge: 7d
+      audit:
+        maxAge: 7d
+    elasticsearch:
+      nodeCount: 3 
+      storage:
+        storageClassName: <storage_class_name> 
+        size: 200G
+      resources: 
+          limits:
+            memory: 16Gi
+          requests:
+            memory: 16Gi
+      proxy: 
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 256Mi
+      redundancyPolicy: SingleRedundancy
+  visualization:
+    type: kibana 
+    kibana:
+      replicas: 1
+  collection:
+    type: fluentd 
+    fluentd: {}
+```
+
   - create index infra and app in kibana
 
 
