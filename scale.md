@@ -64,7 +64,7 @@
   - set Name: example
   - Minimum Pods: 1
   - Maximum Pods: 3
-  - CPU Utilization: 1%
+  - CPU Utilization: 10%
   ![](images/scale_13.png) 
 - click save, and wait until backend deployment change to Autoscaling
   ![](images/scale_14.png) 
@@ -86,14 +86,14 @@
 - click Observe tab to view CPU usage 
   ![](images/scale-99.png)
 - back to web terminal, input 'ctrl-c' to terminate load test command
-- wait 5 minute, autoscaled will reduce pod to 1.
+- wait 5 minute, autoscaled will reduce pod to 1. **(if you don't want to wait autoscale down to 1 pod, you can remove HorizontalPodAutoscaler and manual scale down to 1 by yourself.)**
   ![](images/scale_18.png)
 - remove HorizontalPodAutoscaler, go to backend deployment information page, select action menu, select remove HorizontalPodAutoscaler
   ![](images/scale_19.png)      
 - confirm Remove, and wait until backend change to manual scale
   ![](images/scale_20.png)  
   ![](images/scale_11.png) 
-- Optional: if you don't want to wait autoscale down to 1 pod, you can remove HorizontalPodAutoscaler and manual scale down to 1 by yourself.
+- **Optional: if you don't want to wait autoscale down to 1 pod, you can remove HorizontalPodAutoscaler and manual scale down to 1 by yourself.**
   
 
 ## Next Step
