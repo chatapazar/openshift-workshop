@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "add role 1 to 30 ..."
+echo "add role 1 to 40 ..."
 oc login -u admin -p cAhTVmv3hoiVN4aD --insecure-skip-tls-verify
 oc adm policy add-role-to-user monitoring-edit user1 -n user1
 oc adm policy add-role-to-user monitoring-edit user2 -n user2

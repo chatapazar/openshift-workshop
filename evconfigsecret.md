@@ -127,5 +127,5 @@ The Secret object type provides a mechanism to hold sensitive information such a
   ```
 
 ## Next Step
-- [Application Health check](apphealth.md)
+- [Scaling up your application in order to handle workload](scale.md)
 

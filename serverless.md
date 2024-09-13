@@ -5,7 +5,6 @@
   - [Prerequisite](#prerequisite)
   - [Change your application to Serverless](#change-your-application-to-serverless)
   - [Congratulation, You Complete This LAB!!!](#congratulation-you-complete-this-lab)
-  - [Optional!!! --\> Next Step](#optional----next-step)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -47,8 +46,7 @@
 
 ## Congratulation, You Complete This LAB!!!
 
-## Optional!!! --> Next Step
-- [Complex Cloud-Native Application with Live Flight Track Demo](liveflight.md)
+
 
 
 

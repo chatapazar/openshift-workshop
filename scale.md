@@ -94,5 +94,5 @@
   
 
 ## Next Step
-- [OOTB Application Monitoring & User workload monitoring](monitor.md)
+- [Basic Serverless, auto scale up & scale down by request](serverless.md)
 
