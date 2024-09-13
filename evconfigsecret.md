@@ -55,7 +55,7 @@ You can set environment variables for containers running in a pod. Additionally,
   Backend version:v1, Response:400, Host:backend-6cf95f994d-cgxsb, Status:400, Message: Hello, World
   ```
 
-- Wait a few minutes if curl result is show `Application is not available`, and try again.
+- **Wait a few minutes if curl result is show `Application is not available`, and try again.**
 
   ![](images/env-99.png)
 
