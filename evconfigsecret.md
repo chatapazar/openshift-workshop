@@ -50,7 +50,7 @@ You can set environment variables for containers running in a pod. Additionally,
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
-  check output change, Response:400 
+  check output change, Response:400 (wait 10-15 seconds if console display endpoint not found)
   ```bash
   Backend version:v1, Response:400, Host:backend-6cf95f994d-cgxsb, Status:400, Message: Hello, World
   ```
