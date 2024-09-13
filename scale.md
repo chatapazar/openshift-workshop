@@ -21,6 +21,9 @@
 - wait until application scale to 2 Pods (circle around Duke icon change to dark blue)
   ![](images/scale_2.png)
   ![](images/scale_3.png)
+
+- Wait a few minutes, util new pod ready to receive request!!! 
+
 - Test load to application, go to web terminal, run below command 
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
@@ -81,7 +84,7 @@
 - click resources tab, see 3 pods auto scale
   ![](images/scale_16.png)
 - click Observe tab to view CPU usage 
-  ![](images/scale_17.png)
+  ![](images/scale-99.png)
 - back to web terminal, input 'ctrl-c' to terminate load test command
 - wait 5 minute, autoscaled will reduce pod to 1.
   ![](images/scale_18.png)
