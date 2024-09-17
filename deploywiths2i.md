@@ -53,7 +53,7 @@
 - click +Add menu in left pane
 - select Import from Git
   ![](images/work_6.png)
-- in Import from Git page, input Git Repo URL with 'https://github.com/chatapazar/openshift-workshop.git'
+- in Import from Git page, input Git Repo URL with 'https://gitlab.com/chatapazar/openshift-workshop.git'
 - wait until Openshift validate URL complete (page will show validated complete icon)
   ![](images/work_7.png)
   - Optional: Not required for this lab! 
