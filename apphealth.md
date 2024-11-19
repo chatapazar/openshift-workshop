@@ -31,15 +31,18 @@ A Liveness checks determines if the container in which it is scheduled is still 
 - Review Application Liveness Probe 
   - review code URL: https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/src/main/java/org/acme/microprofile/health/SimpleHealthCheck.java
   - go to web terminal, connect to backend pod
+    
     ```bash
     POD=$(oc get pods --no-headers -l app=backend | grep backend |head -n 1| awk '{print $1}')
     oc rsh $POD
     ```
+    
     after connect to pod, shell will change from 'bash-4.4' to 'sh-4.4'
+    
     ```bash
-    bash-4.4 ~ $ oc rsh $POD
     sh-4.4$ 
     ```
+
   - test call liveness probe of application
     ```bash
     curl -v http://localhost:8080/q/health/live
@@ -114,11 +117,17 @@ A Liveness checks determines if the container in which it is scheduled is still 
     ```  
 - Review Application Readiness Probe 
   - review code URL: https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/src/main/java/org/acme/microprofile/health/DatabaseConnectionHealthCheck.java
+
   - click topology in left menu, click Duke icon (backend deployment), click pod name link (such as 'P backend-xxxx-xxxxx' link)
+
     ![](images/health_1.png) 
+
   - in Pod details, click Terminal Tab, web console will show terminal to backend pod.
+
     ![](images/health_2.png)
+
   - test call readyness probe of application
+
     ```bash
     curl -v http://localhost:8080/q/health/ready 
     ```
@@ -196,14 +205,19 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```
 - set readiness probe and liveness probe, resume deployment update configuration trigger
   ```bash
-  oc set probe deployment/backend --readiness --get-url=http://:8080/q/health/ready --initial-delay-seconds=20 --failure-threshold=1 --period-seconds=3 --timeout-seconds=5
-  oc set probe deployment/backend --liveness --get-url=http://:8080/q/health/live --initial-delay-seconds=20 --failure-threshold=1 --period-seconds=10 --timeout-seconds=5
+  oc set probe deployment/backend --readiness --get-url=http://:8080/q/health/ready --initial-delay-seconds=60 --failure-threshold=1 --period-seconds=3 --timeout-seconds=5
+  oc set probe deployment/backend --liveness --get-url=http://:8080/q/health/live --initial-delay-seconds=60 --failure-threshold=1 --period-seconds=10 --timeout-seconds=5
   oc rollout resume deployment/backend
   ```
+
 - wait until backend re-deploy complete
+
   ![](images/health_3.png) 
+
 - view current health check, click topology in left menu, click Duke icon (backend deployment), at actions menu, select edit Health Checks, view current Health checks
+
   ![](images/health_4.png) 
+
   ![](images/health_5.png)   
 
 ## Test Liveness Probe
@@ -251,7 +265,7 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```bash
   oc scale deployment/backend --replicas=2
   ```
-- check, have 2 pod of backend
+- check, have 2 pod of backend (wait until running 2 pods, 1 minutes)
   ```bash
   oc get pod -l app=backend
   ```

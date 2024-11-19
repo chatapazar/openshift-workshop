@@ -15,26 +15,35 @@
 <!-- /TOC -->
 
 ## Openshift Project
-- open browser to https://console-openshift-console.apps.xxx.opentlc.com
+- open browser to https://console-openshift-console.apps.cluster-pnhsf.pnhsf.sandbox1540.opentlc.com
+
   - confirm URL from instructor
+
 - login to openshift with your username/password
-  - username: 'userx'
-  - password: 'password from register'
+  
+  - username: `xxx` --> get from instructor
+  - password: `xxx` --> get from instructor
   ![](images/work_1.png)
-- select Developer Perspective from left menu (if openshift don't default page for you)
-  ![](images/work_2.png)
-- default project is your name. such as 'user1', 'user2'  
+
 - if login first time, dev console will launch developer quick tour, click Skip tour
+  
   ![](images/deploy_2.png)
+
+- select Developer Perspective from left menu (if openshift don't default page for you)
+
+  ![](images/work_2.png)
+
+- default project is your name. such as `user1`, `user2`  
 - if deveveloper console not default your project, click Project name 'PR userx' in topology or select from Project Dropdownlist
+  
   ![](images/deploy_3.png)
-  ![](images/deploy_4.png)
+  
 - Optional: How to Create Project (Don't create project in this workshop, we prepare project for you now!)
-  - create project with your username such as 'user1'  
+  - create project with your username such as `user1`  
     - go to dropdown at Project: All Projects
     - click Create Project 
     ![](images/deploy_4.png)
-    - set Name*= 'userx', Display Name = 'userx', Description = 'userx workshop' (Please use your username to Project name!!!)
+    - set Name*= `userx`, Display Name = `userx`, Description = `userx workshop` (Please use your username to Project name!!!)
     ![](images/work_4.png)
     - click create, openshift console will change page to new project
     ![](images/work_3.png)
@@ -42,53 +51,83 @@
 
 ## Set Default OpenShift Console!!!
 - click user at top-right of OpenShift Console, select User References
+
   ![](images/user-set-1.png)
+
 - In General Section, you can change theme from dark mode (default) to light mode
+
   ![](images/user-set-2.png)
-- In Application Section, set default resource type from Serverless to Deployment
+
+- In Application Section, set default resource type from `Serverless` to `Deployment`
+
   ![](images/user-set-3.png)
 
 
 ## Deploy Application to Openshift with OpenShift Developer Console (S2I)
 - click +Add menu in left pane
-- select Import from Git
+- select Git Repository, Import from Git (In Git Repository, Not Serveless function)
+  
   ![](images/work_6.png)
-- in Import from Git page, input Git Repo URL with 'https://gitlab.com/chatapazar/openshift-workshop.git'
+
+- in Import from Git page, input Git Repo URL with `https://gitlab.com/chatapazar/openshift-workshop.git`
+
 - wait until Openshift validate URL complete (page will show validated complete icon)
+
   ![](images/work_7.png)
-  - Optional: Not required for this lab! 
+
+  - Optional: Not required for this lab! (by click Show advanced Git options)
     
     you can input additional information for get source code such as
     - Git Reference: for branch, tag, or commit. (default s2i will checkout from default branch such as main or master)
     - Context dir: in case source code don't place in root of git such as /code
     - Source Secret: provide user/password for private repository
+
   ![](images/work_26.png)  
+
 - Click Edit Import Strategy for change default Builder Image (pencil icon)
+
+  ![](images/work_8_1.png)
+
 - OpenShift S2I will automatic select Builder Image from your source code, in case s2i can't detect base image. you can manual select.
 - developer can select builder image version from dropdown list such as java application can select base image for jdk8 or jdk11 
+  
 - for this workshop, Please select 'openjdk-11-ubi8'  or Red Hat OpenJDK 11 (UBI 8) (default is openjdk-17-ubi8, it's new jdk version. it don't match with simple code in this demo! :D )
+
   ![](images/work_8.png)
-- next, in general section set
-  - Application name: backend
-  - Name: backend
-  - Resources: select <strong>Deployment</strong> (default is serverless, deployment for standard Kubernetes, DeploymentConfig is deployment with extension feature from OpenShift, user can set default in user reference menu!!!)
+
+- next, in general section set value of
+
+  - Application name: `backend`
+  - Name: `backend`
+  - Resources: select `Deployment` (default is serverless, deployment for standard Kubernetes, DeploymentConfig is deployment with extension feature from OpenShift, user can set default in user reference menu!!!)
+  - Build Option: `Builds` (to use openshift s2i)
   - Advanced Options: checked Create a Route to the Application
+
   ![](images/work_9.png)
+
+  - leave other default value
+  
 - before click create, in advanced option
-  - click 'Labels' link
+  - click `Labels` link
   ![](images/work_10.png)
-  - add label 'app=backend'
+  - add label `app=backend`
   ![](images/work_11.png)
-  - click 'Resource limits' link
+  - click `Resource limits` link
   - set CPU Request: 50 millicores
   - set CPU Limit:   100 millicores
   - set Memory Request: 256 Mi
   - set Memory Limit:   512 Mi
+  
   ![](images/work_12.png)
+  
   - Click Create, Console will back to Topology Page
+  
   ![](images/work_13.png)
+
 - Click at Duke icon, Dev Console will show Deployment information
+
   ![](images/work_14.png)
+
 - in build section, OpenShift Build is creating image with S2I  
   ![](images/work_15.png)
 - click View logs at Build #1

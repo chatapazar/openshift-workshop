@@ -18,7 +18,9 @@
 ## Environment Variable
 You can set environment variables for containers running in a pod. Additionally, Kubernetes automatically exposes certain runtime information via environment variables.
 - Review Code, Check Environment Variable
+
   - https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/src/main/resources/application.properties
+  
   - In this properties, app.backend is url of backend service, we use this property for Rest Client 
     ```yaml
     app.backend=https://httpbin.org/status/200
@@ -38,19 +40,30 @@ You can set environment variables for containers running in a pod. Additionally,
     Backend version:v1, Response:200, Host:backend-56957dcc4f-t9bpf, Status:200, Message: Hello, World
     ```
 - Change Environment Variable, From Topology, click Duke icon (backend deployment), backend link in side panel (click link at 'D backend')
+
     ![](images/env_1.png)
+
 - select Environment tab, 
+
     ![](images/env_2.png)
-- in single values(env), input name: 'app.backend' and value: 'https://httpbin.org/status/400', clicke save
+
+- in single values(env), input name: `app.backend` and value: `https://httpbin.org/status/400`, clicke save
+
     ![](images/env_3.png)
+
 - wait until openshift redeploy backend success
+
     ![](images/env_5.png)
+
 - back to web terminal, test call backend again
+
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
+
   check output change, Response:400 
+
   ```bash
   Backend version:v1, Response:400, Host:backend-6cf95f994d-cgxsb, Status:400, Message: Hello, World
   ```
@@ -110,16 +123,27 @@ The Secret object type provides a mechanism to hold sensitive information such a
   Backend version:v1, Response:200, Host:backend-95647fbb8-62584, Status:200, Message: Not Found Secret
   ```
 - click Secrets from left menu
+  
   ![](images/env_12.png)
+
 - select create with key/value secret
+
   ![](images/env_13.png)
-- in create key/value secret page, set secret name: example, key: 'app.secretMessage', value: 'Hi! World of Quarkus!', click Create
+
+- in create key/value secret page, set secret name: example, key: `app.secretMessage`, value: `Hi! World of Quarkus!`, click Create
+
   ![](images/env_14.png)
-- check in secret 'example', in data section, show 'app.secretMessage' and value with encryption (you can click copy and paste in your editor to view message)
+
+- check in secret `example`, in data section, show `app.secretMessage` and value with encryption (you can click copy and paste in your editor to view message)
+
   ![](images/env_15.png)
+
 - back to Topology, click Duke icon (backend deployment), backend link in side panel (click link at 'D backend'), click Environment Tab
-- click 'Add from ConfigMap or Secret', set name: 'app.secretMessage', value: 'S example' and key: 'app.secretMessage'
+
+- click `Add from ConfigMap or Secret`, set name: `app.secretMessage`, value: `S example` and key: `app.secretMessage`
+
   ![](images/env_16.png)
+
 - click save, wait until backend redeploy complete
 - Re-Test showsecret api again
   ```bash
@@ -131,5 +155,5 @@ The Secret object type provides a mechanism to hold sensitive information such a
   ```
 
 ## Next Step
-- [Scaling up your application in order to handle workload](scale.md)
+- [Application Health check](apphealth.md)
 

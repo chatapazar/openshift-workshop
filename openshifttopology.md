@@ -2,13 +2,13 @@
 <!-- TOC -->
 
 - [Basic Openshift Topology](#basic-openshift-topology)
-    - [Prerequisite](#prerequisite)
-    - [Pods](#pods)
-    - [Labels](#labels)
-    - [Deployment](#deployment)
-    - [Service](#service)
-    - [Route](#route)
-    - [Next Step](#next-step)
+  - [Prerequisite](#prerequisite)
+  - [Pods](#pods)
+  - [Labels](#labels)
+  - [Deployment](#deployment)
+  - [Service](#service)
+  - [Route](#route)
+  - [Next Step](#next-step)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -21,18 +21,26 @@
 A pod is a collection of containers sharing a network, acting as the basic unit of deployment in Openshift. All containers in a pod are scheduled on the same node.  
 To launch a pod using the container imagequay.io/openshiftlabs/simpleservice:0.5.0 and exposing a HTTP API on port 9876, execute:
 
+  - example to run command in web terminal
+
+  ![](images/basic_2_1.png)
+
+run below command to start pod
+
 ```bash
 oc run sise --image=quay.io/openshiftlabs/simpleservice:0.5.0 --port=9876
 ```
 wait until sise pod circle change to dark blue
+
 ![](images/basic_2.png)
+
 Check to see if the pod is running:
 
 ```bash
 oc get pods
 ```
 
-Resulting in output similar to the following:
+Result in output similar to the following:
 ```bash
 NAME                                         READY   STATUS      RESTARTS   AGE
 sise                                         1/1     Running     0          2m
@@ -65,6 +73,7 @@ or use Openshift Web Console to terminal to this Pod
 - clean up your 'sise' pod
   - back to web terminal in buttom frame
   - at command prompt call below command for clean up pod (click restart terminal if your terminal is terminated)
+  
   ```bash
   oc delete pod sise
   ```
@@ -91,11 +100,16 @@ Labels are the mechanism used to organize Kubernetes objects. A label is a key-v
 - edit label with Openshift Web Console
   - click Pod 'labelex' on Topology page
   - in Pod 'labelex' information click tab Details
+  
     ![](images/topology_5.png) 
+  
   - click edit link (near pencil icon) at lables section to view Edit labels
   - add 'owner=userx', change userx to your username such as user1 and save
+  
     ![](images/topology_6.png)
-  - view change 
+  
+  - view change
+   
     ![](images/topology_7.png)
 - use label for select Openshift Object
   - To use a label for filtering, use the -l option:

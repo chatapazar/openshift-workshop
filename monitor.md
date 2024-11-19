@@ -20,25 +20,44 @@
 - view defalt monitoring per deployment, click topology, click duke icon (backend deployment), in backend deployment, select observe tab
   - view CPU usage,
   - view Memory usage
+
   ![](images/mon_1.png)
+
 - view Project Monitoring, click Observe in left menu, select Dashboard Tab
 - this page will show Monitoring Information of current project (all resources in this project)
+
   ![](images/mon_2.png)
+
 - can filter by workload, click at dashboard dropdownlist and select Kubernetes/Compute Resources/Workload, type deployment, workload backend  
+
   ![](images/mon_3.png)
+
 - select tab Metrics to view performance/metrics information by type, click select query dropdown list to select default metrics information such as cpu usage, memory usage, filesystem usage, etc. 
+
   ![](images/mon_4.png)
+
 - select CPU usage, click check box 'Stacked'
+
   ![](images/mon_6.png)  
+
 - change to another metrics such as memory usage.
+
   ![](images/mon_7.png) 
+
 - OpenShift Monitoring base on Prometheus Technology, you can use PromQL for retrive metric information, in select query dropdown list, select Custom query and type 'cpu' and wail auto suggestion, 
+
   ![](images/mon_8.png) 
+
 - select 'pod:container_cpu_usage:sum' and type 'enter' button to view this metrics from PromQL
+
   ![](images/mon_9.png) 
+
 - click Alerts tab to view all alert (the Alerting UI enables you to manage alerts, silences, and alerting rules, we will create alert in next step in this session)
+
   ![](images/mon_21.png)
+
 - click Events Tab to view All event in this project or filter by resource
+
   ![](images/mon_10.png) 
 
 ## Review Application Performance Metric Code
@@ -47,6 +66,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
   - backend application use quarkus microprofile metrics libraly to generate application metrics
   - example code: https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/src/main/java/org/acme/getting/started/BackendResource.java
   - example custom metrics in code:
+
     ```java
     @Counted(
         name = "countBackend", 
@@ -63,13 +83,17 @@ Developer can enable monitoring for user-defined projects in addition to the def
         )
     public Response callBackend(@Context HttpHeaders headers) throws IOException {
     ```
+
 - review example metrics of backend application, go to web terminal
 - call default quarkus microprofile metrics example
+
   ```bash
   oc exec $(oc get pods -l app=backend | grep backend | head -n 1 | awk '{print $1}') \
   -- curl -s  http://localhost:8080/q/metrics
   ```
+
   example result
+
   ```bash
   ...
   # HELP vendor_memoryPool_usage_max_bytes Peak usage of the memory pool denoted by the 'name' tag
@@ -83,12 +107,16 @@ Developer can enable monitoring for user-defined projects in addition to the def
   vendor_memoryPool_usage_max_bytes{name="PS Old Gen"} 1.8408896E7
   vendor_memoryPool_usage_max_bytes{name="PS Survivor Space"} 5705344.0
   ```
+
 - call custom quarkus microprofile metrics example
+
   ```bash
   oc exec $(oc get pods -l app=backend | grep backend | head -n 1 | awk '{print $1}') \
   -- curl -s  http://localhost:8080/q/metrics/application
   ```
+
   example result
+
   ```bash
   # TYPE application_org_acme_getting_started_BackendResource_timeBackend_seconds summary
   application_org_acme_getting_started_BackendResource_timeBackend_seconds_count 1.0
@@ -103,13 +131,21 @@ Developer can enable monitoring for user-defined projects in addition to the def
   ```
 
 ## Add Application Performance Metric to OpenShift
+
 - create ServiceMonitor, go to Search in left menu, 
+ 
   ![](images/mon_11.png) 
+
 - in search page, in resources drop down, type 'servicemonitor' for filter, click 'SM ServiceMonitor'
+
   ![](images/mon_12.png) 
+
 - Click Create ServiceMonitor button
+
   ![](images/mon_13.png) 
+
 - in Create ServiceMonitor Page, input below YAML for create ServiceMonitor to backend application
+
   ```yaml
   apiVersion: monitoring.coreos.com/v1
   kind: ServiceMonitor
@@ -131,26 +167,40 @@ Developer can enable monitoring for user-defined projects in addition to the def
       matchLabels:
         app: backend  
   ```
+
   example: 
+
   ![](images/mon_14.png)  
+
 - click create and review your ServiceMonitor, click YAML tab to view your yaml code. 
+
   ![](images/mon_15.png) 
+
 - test call you backend application
-- go to web terminal. test call your backend 2-3 times
+- go to web terminal. test call your backend 5-6 times
+
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
+
 - click Observe in left menu, select Metrics Tab
+
   ![](images/mon_16.png)         
-- in select query, change to custom query, type 'app' and wait auto suggesstion
-  ![](images/mon_17.png) 
+
+- in select query, change to custom query, type `app` and wait auto suggesstion
+
+  ![](images/mon_17.png)
+
   ![](images/mon_18.png)
+
 - Remark: if you don't found metrics 'application*' in auto suggession, wait a few minute and retry again
-- select 'application_org_acme_getting_started_BackendResource_countBackend_total', type enter.
+- select from suggestion or type in query box with `application_org_acme_getting_started_BackendResource_countBackend_total`, type enter.
+
   ![](images/mon_19.png) 
+
 - change your custom PromQL such as average tocal call backend service in 1 minute is   
-  - type: 'rate(application_org_acme_getting_started_BackendResource_countBackend_total[1m])'
+  - type: `rate(application_org_acme_getting_started_BackendResource_countBackend_total[1m])`
   - enter
   ![](images/mon_20.png) 
 - Optional: test call backend 2-3 times and check metrics change in Monitoring Pages
@@ -186,7 +236,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
   click add icon (+) to open yaml editor
   ![](images/alert_1.png) 
   
-- input PrometheusRule yaml in editor and create (change namespace before run)
+- input PrometheusRule yaml in editor and create (change `namespace!!!` before run)
   ![](images/alert_2.png)
   
   
