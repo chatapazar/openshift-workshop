@@ -91,9 +91,7 @@
 - OpenShift S2I will automatic select Builder Image from your source code, in case s2i can't detect base image. you can manual select.
 - developer can select builder image version from dropdown list such as java application can select base image for jdk8 or jdk11 
   
-- for this workshop, Please select 'openjdk-11-ubi8'  or Red Hat OpenJDK 11 (UBI 8) (default is openjdk-17-ubi8, it's new jdk version. it don't match with simple code in this demo! :D )
-
-  ![](images/work_8.png)
+- for this workshop, Please select 'openjdk-17-ubi8'  or Red Hat OpenJDK 17 (UBI 8) (default is openjdk-17-ubi8, it's new jdk version. Don't change it! :D )
 
 - next, in general section set value of
 
