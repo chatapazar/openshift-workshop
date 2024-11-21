@@ -5,7 +5,6 @@
   - [Prerequisite](#prerequisite)
   - [Manual Scale Application](#manual-scale-application)
   - [Auto Scale Application](#auto-scale-application)
-  - [Next Step](#next-step)
 
 <!-- /TOC -->
 ## Prerequisite
@@ -132,6 +131,5 @@
 - **Optional: if you don't want to wait autoscale down to 1 pod, you can remove HorizontalPodAutoscaler and manual scale down to 1 by yourself.**
   
 
-## Next Step
-- [OOTB Application Monitoring, Alert & User workload monitoring](monitor.md)
+
 
