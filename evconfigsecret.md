@@ -84,6 +84,7 @@ The ConfigMap object provides mechanisms to inject containers with configuration
 - Click YAML View
 - Create ConfigMap with YAML, copy below yaml to editor, click create
   - Remark: change namespace to your username
+
   ```yaml
   apiVersion: v1
   kind: ConfigMap
@@ -94,22 +95,36 @@ The ConfigMap object provides mechanisms to inject containers with configuration
     app.backend.200: https://httpbin.org/status/200
     app.backend.400: https://httpbin.org/status/400  
   ```
+
   ![](images/env_7.png) 
-- Review configmap 'example' value in data section
+
+- Review configmap `example` value in data section
+
   ![](images/env_8.png) 
+
 - back to Topology, click Duke icon (backend deployment), backend link in side panel (click link at 'D backend'), click Environment Tab
-- remove old app.backend environment variable
+
+- remove old `app.backend` environment variable
+
   ![](images/env_9.png) 
-- click 'Add from ConfigMap or Secret', set name: 'app.backend', value: 'CM example' and key: 'app.backend.200'
+
+- click 'Add from ConfigMap or Secret', set name: `app.backend`, value: 'CM example' and key: `app.backend.200`
+
   ![](images/env_10.png) 
+
 - click save, and wait until backend redeploy complete
+
   ![](images/env_5.png)
+
 - back to web terminal, test call backend again
+
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
+
   check output change, Response:200 
+
   ```bash
   Backend version:v1, Response:200, Host:backend-95647fbb8-2xql7, Status:200, Message: Hello, World
   ```
@@ -117,14 +132,18 @@ The ConfigMap object provides mechanisms to inject containers with configuration
 ## Secret
 The Secret object type provides a mechanism to hold sensitive information such as passwords, OpenShift Container Platform client configuration files, dockercfg files, private source repository credentials, and so on. Secrets decouple sensitive content from the pods. You can mount secrets into containers using a volume plug-in or the system can use secrets to perform actions on behalf of a pod.
 
-- at web terminal, test curret value of secret message : 'Not Found Secret'
+- at web terminal, test curret value of secret message : `Not Found Secret`
+
   ```bash
   curl $BACKEND_URL/backend/showsecret
   ```
+
   example result
+
   ```bash
   Backend version:v1, Response:200, Host:backend-95647fbb8-62584, Status:200, Message: Not Found Secret
   ```
+
 - click Secrets from left menu
   
   ![](images/env_12.png)
@@ -149,10 +168,13 @@ The Secret object type provides a mechanism to hold sensitive information such a
 
 - click save, wait until backend redeploy complete
 - Re-Test showsecret api again
+
   ```bash
   curl $BACKEND_URL/backend/showsecret
   ```
+
   example result
+
   ```bash
   Backend version:v1, Response:200, Host:backend-5bc95899d-tdmv5, Status:200, Message: Hi! World of Quarkus!
   ```
