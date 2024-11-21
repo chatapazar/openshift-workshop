@@ -1,4 +1,4 @@
-# OpenShift Cloud-Native Application Developer Productivity Workshop
+# OpenShift Workshop
 
 ![](images/workshop.png)
 
