@@ -78,7 +78,10 @@ Many applications require configuration using some combination of configuration 
 The ConfigMap object provides mechanisms to inject containers with configuration data while keeping containers agnostic of OpenShift Container Platform. A ConfigMap can be used to store fine-grained information like individual properties or coarse-grained information like entire configuration files or JSON blobs.
 
 - create example ConfigMap, click ConfigMaps at left menu, click Create ConfigMap
+
   ![](images/env_6.png)  
+
+- Click YAML View
 - Create ConfigMap with YAML, copy below yaml to editor, click create
   - Remark: change namespace to your username
   ```yaml
