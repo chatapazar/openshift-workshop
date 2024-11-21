@@ -15,14 +15,14 @@
 <!-- /TOC -->
 
 ## Openshift Project
-- open browser to https://console-openshift-console.apps.cluster-pnhsf.pnhsf.sandbox1540.opentlc.com
+- open browser to https://console-openshift-console.apps.cluster-fj4k4.fj4k4.sandbox2096.opentlc.com
 
   - confirm URL from instructor
 
 - login to openshift with your username/password
   
-  - username: `xxx` --> get from instructor
-  - password: `xxx` --> get from instructor
+  - username: `xxx` --> get from register page
+  - password: `xxx` --> get from register page
   ![](images/work_1.png)
 
 - if login first time, dev console will launch developer quick tour, click Skip tour
