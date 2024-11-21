@@ -205,8 +205,8 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ```
 - set readiness probe and liveness probe, resume deployment update configuration trigger
   ```bash
-  oc set probe deployment/backend --readiness --get-url=http://:8080/q/health/ready --initial-delay-seconds=60 --failure-threshold=1 --period-seconds=3 --timeout-seconds=5
-  oc set probe deployment/backend --liveness --get-url=http://:8080/q/health/live --initial-delay-seconds=60 --failure-threshold=1 --period-seconds=10 --timeout-seconds=5
+  oc set probe deployment/backend --readiness --get-url=http://:8080/q/health/ready --initial-delay-seconds=30 --failure-threshold=1 --period-seconds=3 --timeout-seconds=5
+  oc set probe deployment/backend --liveness --get-url=http://:8080/q/health/live --initial-delay-seconds=30 --failure-threshold=1 --period-seconds=10 --timeout-seconds=5
   oc rollout resume deployment/backend
   ```
 
