@@ -15,7 +15,7 @@
 <!-- /TOC -->
 
 ## Openshift Project
-- open browser to https://console-openshift-console.apps.cluster-fj4k4.fj4k4.sandbox2096.opentlc.com
+- open browser to URL from Register Page
 
   - confirm URL from instructor
 
