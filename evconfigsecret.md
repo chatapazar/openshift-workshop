@@ -23,12 +23,12 @@ You can set environment variables for containers running in a pod. Additionally,
   
   - In this properties, app.backend is url of backend service, we use this property for Rest Client 
     ```yaml
-    app.backend=https://httpbin.org/status/200
+    app.backend=https://httpbun.com/status/200
     ```
   - test call backend service in web terminal console 
     ```bash
-    curl -v https://httpbin.org/status/200
-    curl -v https://httpbin.org/status/400
+    curl -v https://httpbun.com/status/200
+    curl -v https://httpbun.com/status/400
     ```
 - Check Current Environment, Test with below command
     ```bash
@@ -47,7 +47,7 @@ You can set environment variables for containers running in a pod. Additionally,
 
     ![](images/env_2.png)
 
-- in single values(env), input name: `app.backend` and value: `https://httpbin.org/status/400`, clicke save
+- in single values(env), input name: `app.backend` and value: `https://httpbun.com/status/400`, clicke save
 
     ![](images/env_3.png)
 
@@ -92,8 +92,8 @@ The ConfigMap object provides mechanisms to inject containers with configuration
     name: example
     namespace: <user user name>
   data:
-    app.backend.200: https://httpbin.org/status/200
-    app.backend.400: https://httpbin.org/status/400  
+    app.backend.200: https://httpbun.com/status/200
+    app.backend.400: https://httpbun.com/status/400  
   ```
 
   ![](images/env_7.png) 
