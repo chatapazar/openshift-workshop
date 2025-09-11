@@ -94,7 +94,8 @@ The ConfigMap object provides mechanisms to inject containers with configuration
   data:
     app.backend.200: http://test.test.svc.cluster.local:8080/status/200
     app.backend.400: http://test.test.svc.cluster.local:8080/status/400
-
+  ```
+  
   ![](images/env_7.png) 
 
 - Review configmap `example` value in data section
