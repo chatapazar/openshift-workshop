@@ -32,8 +32,8 @@ create_projects() {
         oc adm policy add-role-to-user monitoring-edit user$i -n user$i
         oc adm policy add-role-to-user monitoring-rules-edit user$i -n user$i
         #oc -n openshift-user-workload-monitoring adm policy add-role-to-user user-workload-monitoring-config-edit user$i --role-namespace openshift-user-workload-monitoring
-        #oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i
-        #oc adm policy add-role-to-user cluster-monitoring-view user$i -n openshift-monitoring
+        oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i
+        oc adm policy add-role-to-user cluster-monitoring-view user$i -n openshift-monitoring
         cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i -f -
                 
         repeat '-'

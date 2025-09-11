@@ -38,19 +38,22 @@
 
 - select CPU usage, click check box 'Stacked'
 
-  ![](images/mon_6.png)  
+  ![](images/mon_5.png)  
 
 - change to another metrics such as memory usage.
 
-  ![](images/mon_7.png) 
+  ![](images/mon_6.png) 
 
-- OpenShift Monitoring base on Prometheus Technology, you can use PromQL for retrive metric information, in select query dropdown list, select Custom query and type 'cpu' and wail auto suggestion, 
+- OpenShift Monitoring base on Prometheus Technology, you can use PromQL for retrive metric information, click add query
 
-  ![](images/mon_8.png) 
+  ![](images/mon_61.png) 
 
 - select 'pod:container_cpu_usage:sum' and type 'enter' button to view this metrics from PromQL
 
-  ![](images/mon_9.png) 
+  ![](images/mon_62.png) 
+
+  ![](images/mon_63.png) 
+
 
 - click Alerts tab to view all alert (the Alerting UI enables you to manage alerts, silences, and alerting rules, we will create alert in next step in this session)
 
