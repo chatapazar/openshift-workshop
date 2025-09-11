@@ -38,7 +38,7 @@
   
   ![](images/deploy_3.png)
   
-- Optional: How to Create Project (Don't create project in this workshop, we prepare project for you now!)
+- `Optional: How to Create Project (Don't create project in this workshop, we prepare project for you now!)`
   - create project with your username such as `user1`  
     - go to dropdown at Project: All Projects
     - click Create Project 
@@ -65,7 +65,7 @@
 
 ## Deploy Application to Openshift with OpenShift Developer Console (S2I)
 - click +Add menu in left pane
-- select Git Repository, Import from Git (In Git Repository, Not Serveless function)
+- select Git Repository, Import from Git (In Git Repository, `Not Serveless function!!!`)
   
   ![](images/work_6.png)
 

@@ -17,7 +17,7 @@ create_projects() {
     for i in $( seq 1 $totalUsers )
     do
          echo ""
-         echo "Logging in as user$i user to create projects..."
+         echo "Logging in as user$i user to create projects..."user
          echo
 
          oc login -u user$i -p $USER_PASSWORD --insecure-skip-tls-verify
@@ -31,8 +31,9 @@ create_projects() {
         oc adm policy add-role-to-user view user$i -n test
         oc adm policy add-role-to-user monitoring-edit user$i -n user$i
         oc adm policy add-role-to-user monitoring-rules-edit user$i -n user$i
-        oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i
-        oc adm policy add-role-to-user cluster-monitoring-view user$i -n openshift-monitoring
+        #oc -n openshift-user-workload-monitoring adm policy add-role-to-user user-workload-monitoring-config-edit user$i --role-namespace openshift-user-workload-monitoring
+        #oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i
+        #oc adm policy add-role-to-user cluster-monitoring-view user$i -n openshift-monitoring
         cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i -f -
                 
         repeat '-'
