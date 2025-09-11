@@ -44,10 +44,13 @@ A Liveness checks determines if the container in which it is scheduled is still 
     ```
 
   - test call liveness probe of application
+
     ```bash
     curl -v http://localhost:8080/q/health/live
     ```
+
     example output
+
     ```bash
     < HTTP/1.1 200 OK
     < content-type: application/json; charset=UTF-8
@@ -65,12 +68,16 @@ A Liveness checks determines if the container in which it is scheduled is still 
     * Connection #0 to host localhost left intact
     }
     ```
+
   - test stop liveness (simulate pod not working) and test call liveness probe of application
+
     ```bash
     curl http://localhost:8080/backend/stop
     curl -v http://localhost:8080/q/health/live
     ```
+
     example output
+
     ```bash
     < HTTP/1.1 503 Service Unavailable
     < content-type: application/json; charset=UTF-8
@@ -88,12 +95,16 @@ A Liveness checks determines if the container in which it is scheduled is still 
     * Connection #0 to host localhost left intact
     }
     ```
+
   - start liveness again and test call liveness probe of application
+
     ```bash
     curl http://localhost:8080/backend/start
     curl -v http://localhost:8080/q/health/live
     ```
+
     example output
+
     ```bash
     < HTTP/1.1 200 OK
     < content-type: application/json; charset=UTF-8
@@ -111,11 +122,15 @@ A Liveness checks determines if the container in which it is scheduled is still 
     * Connection #0 to host localhost left intact
     }
     ```
+
   - exit from pod
+
     ```bash
     exit
     ```  
+
 - Review Application Readiness Probe 
+
   - review code URL: https://raw.githubusercontent.com/chatapazar/openshift-workshop/main/src/main/java/org/acme/microprofile/health/DatabaseConnectionHealthCheck.java
 
   - click topology in left menu, click Duke icon (backend deployment), click pod name link (such as 'P backend-xxxx-xxxxx' link)
@@ -131,7 +146,9 @@ A Liveness checks determines if the container in which it is scheduled is still 
     ```bash
     curl -v http://localhost:8080/q/health/ready 
     ```
+
     example output
+
     ```bash
     < HTTP/1.1 200 OK
     < content-type: application/json; charset=UTF-8
@@ -149,12 +166,16 @@ A Liveness checks determines if the container in which it is scheduled is still 
     * Connection #0 to host localhost left intact
     }
     ```
+
   - test down readyness prove of application and re-test again
+
     ```bash
     curl http://localhost:8080/databasestatus/down
     curl -v http://localhost:8080/q/health/ready 
     ```
+
     example output
+
     ```bash
     < HTTP/1.1 503 Service Unavailable
     < content-type: application/json; charset=UTF-8
@@ -172,12 +193,16 @@ A Liveness checks determines if the container in which it is scheduled is still 
     * Connection #0 to host localhost left intact
     }
     ```  
+
   - up readyness probe of application, and re-test again
+
     ```bash
     curl http://localhost:8080/databasestatus/up
     curl -v http://localhost:8080/q/health/ready 
     ```
+
     example output
+
     ```bash
     < HTTP/1.1 200 OK
     < content-type: application/json; charset=UTF-8
@@ -195,15 +220,20 @@ A Liveness checks determines if the container in which it is scheduled is still 
     * Connection #0 to host localhost left intact
     }
     ```
+
 - back to Topology Page
   
 ## Set Application Health Check
+
 - go to web terminal
 - pause auto re-deploy from deployment update configuration trigger
+
   ```bash
   oc rollout pause deployment/backend
   ```
+
 - set readiness probe and liveness probe, resume deployment update configuration trigger
+
   ```bash
   oc set probe deployment/backend --readiness --get-url=http://:8080/q/health/ready --initial-delay-seconds=60 --failure-threshold=1 --period-seconds=3 --timeout-seconds=5
   oc set probe deployment/backend --liveness --get-url=http://:8080/q/health/live --initial-delay-seconds=60 --failure-threshold=1 --period-seconds=10 --timeout-seconds=5
@@ -221,26 +251,36 @@ A Liveness checks determines if the container in which it is scheduled is still 
   ![](images/health_5.png)   
 
 ## Test Liveness Probe
+
 - go to web terminal
 - check current pod
+
   ```bash
   oc get pods -l app=backend
   ```
+
   example result, check restarts value (0,1,2 or ?)
+
   ```bash
   NAME                       READY   STATUS    RESTARTS   AGE
   backend-58769d5765-dw6fc   1/1     Running   0          15h
   ```
+
 - call stop api for simulate pod stop, go to web terminal
+
   ```bash
   POD=$(oc get pods --no-headers -l app=backend | grep backend |head -n 1| awk '{print $1}')
   oc exec $POD -- curl -s http://localhost:8080/backend/stop
   ```
+
 - check liveness probe error 
+
   ```bash
   oc describe pod $POD
   ```
+
   example result, see Liveness probe failed, after that openshift will auto-restart pod
+
   ```bash
   ...
   Warning  Unhealthy       7s (x2 over 7m27s)  kubelet  Liveness probe failed: HTTP probe failed with statuscode: 503
@@ -249,37 +289,51 @@ A Liveness checks determines if the container in which it is scheduled is still 
   Normal   Started         6s (x3 over 19m)    kubelet  Started container backend
   Normal   Created         6s (x3 over 19m)    kubelet  Created container backend
   ```   
+
 - check result, openshift will auto-restart pod after liveness probe error
+
   ```bash
   oc get pods -l app=backend
   ```
+
   example result, check restarts is ?
+
   ```bash
   NAME                                         READY   STATUS      RESTARTS   AGE
   backend-58769d5765-dw6fc                     1/1     Running     1          15h
   ```
 
 ## Test Readiness Probe
+
 - go to web terminal
 - scale pod to 2  
+
   ```bash
   oc scale deployment/backend --replicas=2
   ```
+
 - check, have 2 pod of backend (wait until running 2 pods, 1 minutes)
+
   ```bash
   oc get pod -l app=backend
   ```
+
   example result, check ready is 1/1 (wait until both pod running and ready is 1/1)
+
   ```bash
   NAME                      READY   STATUS    RESTARTS   AGE
   backend-87784db56-2642v   1/1     Running   0          2m38s
   backend-87784db56-swg4m   1/1     Running   1          6m19s
   ```
+
 - check service call to both pods
+
   ```bash
   oc describe service backend
   ```
+
   example result, in endpoints section have 2 ipaddress from both pods.
+
   ```bash
   ...
   IP:                172.30.76.111
@@ -297,49 +351,67 @@ A Liveness checks determines if the container in which it is scheduled is still 
   Events:            <none>
   ...
   ```
+
 - test call backend api from route, call 2-4 times to check response from both pods
+
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
+
   example response
+
   ```bash
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   ```
+
 - set readiness prove of backend to down
+
   ```bash
   POD=$(oc get pods --no-headers -l app=backend | grep backend |head -n 1| awk '{print $1}')
   oc exec $POD -- curl -s http://localhost:8080/databasestatus/down
   ```
+
 - check readiness probe error
+
   ```bash
   oc describe pod $POD
   ```
+
   example result, see Readiness probe failed
+
   ```bash
   Normal   Killing         18m (x2 over 25m)  kubelet  Container backend failed liveness probe, will be restarted
   Normal   Created         18m (x3 over 37m)  kubelet  Created container backend
   Normal   Started         18m (x3 over 37m)  kubelet  Started container backend
   Warning  Unhealthy       3s (x7 over 21s)   kubelet  Readiness probe failed: HTTP probe failed with statuscode: 503
   ```bash
+
 - check pod not ready
+
   ```bash
   oc get pods -l app=backend
   ```
+
   example result, check ready change to 0/1 in one pod
+
   ```bash
   NAME                       READY   STATUS    RESTARTS   AGE
   backend-87784db56-2642v   0/1     Running   0          9m48s
   backend-87784db56-swg4m   1/1     Running   0          13m
   ```
-- check service again
+
+<!-- - check service again
+
   ```bash
   oc describe service backend
   ```
+
   example result, endpoints has only one ipaddress.
+
   ```bash
   ...
   IP:                172.30.76.111
@@ -355,47 +427,62 @@ A Liveness checks determines if the container in which it is scheduled is still 
   Endpoints:         10.131.0.43:8778
   Session Affinity:  None
   Events:            <none>
-   ```
+   ``` -->
+
 - test call backend again
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
+
   example result, call 2-4 tiems, have only response from 1 pod.
+
   ```bash
   Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-swg4m, Status:200, Message: Hello, World
   ```
+
 - set readiness probe up again
+
   ```bash
   POD=$(oc get pods --no-headers -l app=backend | grep backend |head -n 1| awk '{print $1}')
   oc exec $POD -- curl -s http://localhost:8080/databasestatus/up
   ```
+
 - check ready
+
   ```bash 
   oc get pods -l app=backend
   ```
+
   example result, ready change back to 1/1
+
   ```bash
   NAME                       READY   STATUS    RESTARTS   AGE
   backend-87784db56-2642v    1/1     Running     0          15m
   backend-87784db56-swg4m    1/1     Running     0          18m
   ```
+
 - re-test call backend again, test call 2-4 times
+
   ```bash
   BACKEND_URL=https://$(oc get route backend -o jsonpath='{.spec.host}')
   curl $BACKEND_URL/backend
   ```
+
   example output, response from 2 pods again.
+
   ```bash
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-58769d5765-dw6fc, Status:200, Message: Hello, World
   Backend version:v1, Response:200, Host:backend-87784db56-2642v, Status:200, Message: Hello, World
   ```
+
 - set repica back to 1  
+
   ```bash
   oc scale deployment/backend --replicas=1
   ```
