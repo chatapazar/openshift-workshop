@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Creating Project 1 to 20 ..."
+echo "Creating Project 1 to 30 ..."
 oc login -u user1 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
 oc new-project user1
 oc login -u user2 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
@@ -40,3 +40,23 @@ oc login -u user19 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
 oc new-project user19
 oc login -u user20 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
 oc new-project user20
+oc login -u user21 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user21
+oc login -u user22 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user22
+oc login -u user23 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user23
+oc login -u user24 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user24
+oc login -u user25 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user25
+oc login -u user26 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user26
+oc login -u user27 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user27
+oc login -u user28 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user28
+oc login -u user29 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user29
+oc login -u user30 -p 0EsMPHqqNMBq8Ed4 --insecure-skip-tls-verify
+oc new-project user30

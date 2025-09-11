@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: view-application-logs
+  namespace: NAMESPACE
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-logging-application-view
+subjects:
+- kind: User
+  name: USERNAME
+  apiGroup: rbac.authorization.k8s.io

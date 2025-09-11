@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "add role 1 to 20 ..."
+echo "add role 1 to 30 ..."
 oc login -u admin -p HeY3yW65e5nJrY79 --insecure-skip-tls-verify
 oc adm policy add-role-to-user monitoring-edit user1 -n user1
 oc adm policy add-role-to-user monitoring-edit user2 -n user2
@@ -21,6 +21,16 @@ oc adm policy add-role-to-user monitoring-edit user17 -n user17
 oc adm policy add-role-to-user monitoring-edit user18 -n user18
 oc adm policy add-role-to-user monitoring-edit user19 -n user19
 oc adm policy add-role-to-user monitoring-edit user20 -n user20
+oc adm policy add-role-to-user monitoring-edit user21 -n user21
+oc adm policy add-role-to-user monitoring-edit user22 -n user22
+oc adm policy add-role-to-user monitoring-edit user23 -n user23
+oc adm policy add-role-to-user monitoring-edit user24 -n user24
+oc adm policy add-role-to-user monitoring-edit user25 -n user25
+oc adm policy add-role-to-user monitoring-edit user26 -n user26
+oc adm policy add-role-to-user monitoring-edit user27 -n user27
+oc adm policy add-role-to-user monitoring-edit user28 -n user28
+oc adm policy add-role-to-user monitoring-edit user29 -n user29
+oc adm policy add-role-to-user monitoring-edit user30 -n user30
 oc adm policy add-role-to-user  monitoring-rules-view user1 -n user1
 oc adm policy add-role-to-user  monitoring-rules-edit user1 -n user1
 oc adm policy add-role-to-user  monitoring-rules-view user2 -n user2
@@ -61,6 +71,26 @@ oc adm policy add-role-to-user  monitoring-rules-view user19 -n user19
 oc adm policy add-role-to-user  monitoring-rules-edit user19 -n user19
 oc adm policy add-role-to-user  monitoring-rules-view user20 -n user20
 oc adm policy add-role-to-user  monitoring-rules-edit user20 -n user20
+oc adm policy add-role-to-user  monitoring-rules-view user21 -n user21
+oc adm policy add-role-to-user  monitoring-rules-edit user21 -n user21
+oc adm policy add-role-to-user  monitoring-rules-view user22 -n user22
+oc adm policy add-role-to-user  monitoring-rules-edit user22 -n user22
+oc adm policy add-role-to-user  monitoring-rules-view user23 -n user23
+oc adm policy add-role-to-user  monitoring-rules-edit user23 -n user23
+oc adm policy add-role-to-user  monitoring-rules-view user24 -n user24
+oc adm policy add-role-to-user  monitoring-rules-edit user24 -n user24
+oc adm policy add-role-to-user  monitoring-rules-view user25 -n user25
+oc adm policy add-role-to-user  monitoring-rules-edit user25 -n user25
+oc adm policy add-role-to-user  monitoring-rules-view user26 -n user26
+oc adm policy add-role-to-user  monitoring-rules-edit user26 -n user26
+oc adm policy add-role-to-user  monitoring-rules-view user27 -n user27
+oc adm policy add-role-to-user  monitoring-rules-edit user27 -n user27
+oc adm policy add-role-to-user  monitoring-rules-view user28 -n user28
+oc adm policy add-role-to-user  monitoring-rules-edit user28 -n user28
+oc adm policy add-role-to-user  monitoring-rules-view user29 -n user29
+oc adm policy add-role-to-user  monitoring-rules-edit user29 -n user29
+oc adm policy add-role-to-user  monitoring-rules-view user30 -n user30
+oc adm policy add-role-to-user  monitoring-rules-edit user30 -n user30
 oc adm policy add-role-to-user cluster-logging-application-view user1 -n user1
 oc adm policy add-role-to-user cluster-logging-application-view user2 -n user2
 oc adm policy add-role-to-user cluster-logging-application-view user3 -n user3
@@ -81,3 +111,13 @@ oc adm policy add-role-to-user cluster-logging-application-view user17 -n user17
 oc adm policy add-role-to-user cluster-logging-application-view user18 -n user18
 oc adm policy add-role-to-user cluster-logging-application-view user19 -n user19
 oc adm policy add-role-to-user cluster-logging-application-view user20 -n user20
+oc adm policy add-role-to-user cluster-logging-application-view user21 -n user21
+oc adm policy add-role-to-user cluster-logging-application-view user22 -n user22
+oc adm policy add-role-to-user cluster-logging-application-view user23 -n user23
+oc adm policy add-role-to-user cluster-logging-application-view user24 -n user24
+oc adm policy add-role-to-user cluster-logging-application-view user25 -n user25
+oc adm policy add-role-to-user cluster-logging-application-view user26 -n user26
+oc adm policy add-role-to-user cluster-logging-application-view user27 -n user27
+oc adm policy add-role-to-user cluster-logging-application-view user28 -n user28
+oc adm policy add-role-to-user cluster-logging-application-view user29 -n user29
+oc adm policy add-role-to-user cluster-logging-application-view user30 -n user30
