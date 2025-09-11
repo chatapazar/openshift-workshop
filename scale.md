@@ -75,14 +75,37 @@
 ## Auto Scale Application
 - Add HorizontalPodAutoscaler
 - Go to Topology, click at Duke icon for open backend deployment, click action dropdown menu, select Add HorizontalPodAutoscaler
-  ![](images/scale_12.png) 
-- in Add HorizontalPodAutoscaler, use Form view
-  - set Name: example
-  - Minimum Pods: `1`
-  - Maximum Pods: `3`
-  - CPU Utilization: `10%`
   
-  ![](images/scale_13.png) 
+  ![](images/scale_12.png) 
+
+- in Add HorizontalPodAutoscaler, use YAML view, input below yaml to create `HorizontalPodAutoscaler`
+
+  ![](images/scale_121.png) 
+
+  ```yaml
+  apiVersion: autoscaling/v2
+  kind: HorizontalPodAutoscaler
+  metadata:
+    name: example
+  spec:
+    scaleTargetRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: backend
+    minReplicas: 1
+    maxReplicas: 3
+    metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            averageUtilization: 10
+            type: Utilization
+  ```
+
+  example
+
+  ![](images/scale_122.png) 
 
 - click save, and wait until backend deployment change to Autoscaling
 

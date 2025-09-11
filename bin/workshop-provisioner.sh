@@ -44,4 +44,4 @@ oc apply -f ../manifests/ClusterLogForwarder.yaml
 
 oc new-project test
 
-# deploy https://github.com/chatapazar/openshift-workshop.git , path /sample, app name: test
+# deploy https://github.com/chatapazar/openshift-workshop.git , path /sample, app name: test, scale 3
