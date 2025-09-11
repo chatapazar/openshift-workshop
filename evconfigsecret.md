@@ -23,12 +23,12 @@ You can set environment variables for containers running in a pod. Additionally,
   
   - In this properties, app.backend is url of backend service, we use this property for Rest Client 
     ```yaml
-    app.backend=https://test-test.apps.cluster-pkc2l.pkc2l.sandbox1337.opentlc.com/status/200
+    app.backend=http://test.test.svc.cluster.local:8080/status/200
     ```
   - test call backend service in web terminal console 
     ```bash
-    curl -v https://test-test.apps.cluster-pkc2l.pkc2l.sandbox1337.opentlc.com/status/200
-    curl -v https://test-test.apps.cluster-pkc2l.pkc2l.sandbox1337.opentlc.com/status/400
+    curl -v http://test.test.svc.cluster.local:8080/status/200
+    curl -v http://test.test.svc.cluster.local:8080/status/400
     ```
 - Check Current Environment, Test with below command
     ```bash
