@@ -139,7 +139,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
  
   ![](images/mon_11.png) 
 
-- in search page, in resources drop down, type 'servicemonitor' for filter, click 'SM ServiceMonitor'
+- in search page, in resources drop down, type 'servicemonitor' for filter, click 'SM ServiceMonitor' (`from monitoring.coreos.com/v1`)
 
   ![](images/mon_12.png) 
 
@@ -189,23 +189,23 @@ Developer can enable monitoring for user-defined projects in addition to the def
 
 - click Observe in left menu, select Metrics Tab
 
-  ![](images/mon_16.png)         
+  ![](images/mon_161.png)         
 
-- in select query, change to custom query, type `app` and wait auto suggesstion
+- in select query, change to custom query, type `app` and wait auto suggesstion (`if you don't found, wait 2-3 minutes for prometheus scrap your metrics`)
 
-  ![](images/mon_17.png)
-
-  ![](images/mon_18.png)
+  ![](images/mon_162.png)
 
 - Remark: if you don't found metrics 'application*' in auto suggession, wait a few minute and retry again
 - select from suggestion or type in query box with `application_org_acme_getting_started_BackendResource_countBackend_total`, type enter.
 
-  ![](images/mon_19.png) 
+  ![](images/mon_163.png) 
 
 - change your custom PromQL such as average tocal call backend service in 1 minute is   
   - type: `rate(application_org_acme_getting_started_BackendResource_countBackend_total[1m])`
   - enter
-  ![](images/mon_20.png) 
+  
+  ![](images/mon_164.png) 
+
 - Optional: test call backend 2-3 times and check metrics change in Monitoring Pages
 
 
@@ -251,11 +251,11 @@ Developer can enable monitoring for user-defined projects in addition to the def
   oc run load-test -n user1 -i \
   --image=loadimpact/k6 --rm=true --restart=Never \
   --  run -  < load-test-k6.js \
-  -e URL=$BACKEND_URL -e THREADS=25 -e DURATION=2m -e RAMPUP=30s -e RAMPDOWN=30s
+  -e URL=$BACKEND_URL -e THREADS=25 -e DURATION=1m -e RAMPUP=30s -e RAMPDOWN=30s
   ```
   
   - 25 threads
-  - Duration 2 minutes
+  - Duration 1 minutes
   - Ramp up 30 sec
   - Ramp down 30 sec
   
@@ -263,7 +263,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
 
   Check for alert in Developer Console by select Menu `Observe` then select `Alerts`
 
-  ![](images/alert_3.png)
+  ![](images/mon_165.png)
 
 
 
