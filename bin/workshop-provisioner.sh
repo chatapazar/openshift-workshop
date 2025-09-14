@@ -1,6 +1,6 @@
-export USER_PASSWORD=dx4SoxXneCObsoyY
-export ADMIN_PASSWORD=c1LW48Nbnt1KezNx
-export totalUsers=3
+export USER_PASSWORD=8kiF8TBMsivrFifU
+export ADMIN_PASSWORD=x0hAF5p1DPy0Xthg
+export totalUsers=30
 
 # install operator
 # web terminal 
